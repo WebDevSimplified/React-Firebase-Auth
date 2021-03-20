@@ -29,7 +29,7 @@ export default function Login() {
     <>
       <div className="container">
         <div className="row">
-          <div className="col-sm-9 col-md-8 col-lg-10 mx-auto">
+          <div className="col-sm-9 col-md-8 col-lg-6 mx-auto">
             <div className="card card-signin my-5">
               <p className="text-center">
                 Don't have an account? <Link to="/signup">Register</Link>

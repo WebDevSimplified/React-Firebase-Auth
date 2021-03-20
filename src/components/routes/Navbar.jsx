@@ -1,7 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react"
+import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext"
 
-const Navbar = () => {
+export default function Navbar() {
+  const [error, setError] = useState("")
+  const { currentUser, logout } = useAuth()
+  const history = useHistory()
+  async function handleLogout() {
+    setError("")
+
+    try {
+      await logout()
+      history.push("/login")
+    } catch {
+      setError("Failed to log out")
+    }
+  }
+
   return (
     <div>
       <nav className="navbar navbar-expand-md bg-dark navbar-dark">
@@ -30,6 +45,9 @@ const Navbar = () => {
                 <button className="btn btn-outline-success" type="submit">
                   Search
                 </button>
+                <button className="btn btn-outline-success" type="btn" onClick={handleLogout}>
+                  Logout
+                </button>
               </form>
             </li>
           </ul>
@@ -38,5 +56,3 @@ const Navbar = () => {
     </div>
   );
 };
-
-export default Navbar
