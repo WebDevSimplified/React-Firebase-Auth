@@ -1,0 +1,9 @@
+.mid_dashboard{
+    size:30px
+}
+.mid_dashboard1 , .demographics{
+    size:40px
+}
+.demographics1,.mid_dashboard2{
+    line-height: 100px;
+}
