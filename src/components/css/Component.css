@@ -1,4 +1,4 @@
-.mid_dashboard{
+.mid_dashboard,.navicons1{
     size:30px
 }
 .mid_dashboard1 , .demographics{
@@ -6,4 +6,9 @@
 }
 .demographics1,.mid_dashboard2{
     line-height: 100px;
+}
+.navicons{
+    line-height:100px;
+    color:black;
+    height: 20vh
 }
