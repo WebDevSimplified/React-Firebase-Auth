@@ -1,4 +1,4 @@
-.mid_dashboard,.navicons1{
+.mid_dashboard,.navicons{
     size:30px
 }
 .mid_dashboard1 , .demographics{
@@ -8,7 +8,10 @@
     line-height: 100px;
 }
 .navicons{
-    line-height:100px;
     color:black;
-    height: 20vh
+    height:25.8vh;
+    margin-top:30px
+}
+body{
+    overflow-x: hidden;
 }
