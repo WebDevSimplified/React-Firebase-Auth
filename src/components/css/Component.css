@@ -1,0 +1,17 @@
+.mid_dashboard,.navicons{
+    size:30px
+}
+.mid_dashboard1 , .demographics{
+    size:40px
+}
+.demographics1,.mid_dashboard2{
+    line-height: 100px;
+}
+.navicons{
+    color:black;
+    height:25.8vh;
+    margin-top:30px
+}
+body{
+    overflow-x: hidden;
+}

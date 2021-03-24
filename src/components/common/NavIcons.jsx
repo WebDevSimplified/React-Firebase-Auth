@@ -3,6 +3,7 @@ import { FaChild } from 'react-icons/fa';
 import { FaBookmark } from 'react-icons/fa';
 import { FaChartBar } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
+import '../css/Component.css'
 
 const NavIcons = () => {
     const css = {
