@@ -3,10 +3,7 @@ import NavIcons from "../common/NavIcons";
 import Navbar from "./Navbar";
 
 const Profile = () => {
-   const css={
-    "height":"100vh",
-    "float":"left",
-  }
+   
   return (
     <>
       <div className="row">
@@ -15,7 +12,7 @@ const Profile = () => {
         </div>
       </div>
       <div className="row">
-        <div className="col-lg-1 col-md-1 col-sm-2 text-center bg-info" style={css}>
+        <div className="col-lg-1 col-md-1 col-sm-2 text-center bg-info dashboard1">
           <NavIcons />
         </div>
         <div className="col-lg-11 col-md-11 col-sm-10 text-left bg-danger">

@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext"
 import logo from '../images/logo.png'
-
+import '../css/style.css'
 export default function Navbar() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
@@ -17,13 +17,10 @@ export default function Navbar() {
       setError("Failed to log out")
     }
   }
-  const css = {
-    "width":"100vw",
-    "overflow": "hidden",
-  }
+ 
   return (
-    <div style={css}>
-      <nav className="navbar navbar-expand-md bg-secondary navbar-dark">
+    <div class="navb">
+      <nav className="navbar navbar-expand-md bg-new navbar-light">
         <Link className="navbar-brand" to="/dashboard">
           <img src={logo} width="150" height="30" />
         </Link>
@@ -44,10 +41,10 @@ export default function Navbar() {
                   type="text"
                   placeholder="Search"/>
                 <button className="btn btn-outline-light" type="submit">
-                  Search
+                  <b>Search</b>
                 </button>
-                <button className="btn btn-outline-light mx-2" type="btn" onClick={handleLogout}>
-                  Logout
+                <button className="btn btn-outline-light mx-2 " type="btn" onClick={handleLogout}>
+                  <b>Logout</b>
                 </button>
               </form>
             </li>

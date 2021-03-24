@@ -2,7 +2,6 @@ import React from 'react';
 import { BsExclamationOctagonFill} from 'react-icons/bs';
 import { GiProgression } from 'react-icons/gi';
 import { IoBodySharp } from 'react-icons/io5';
-import { DashCard } from './Cards.jsx';
 import 'Components.css';
 
 const MidDashBoard = () => {
