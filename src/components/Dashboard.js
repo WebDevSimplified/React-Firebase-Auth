@@ -4,6 +4,7 @@ import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import NavIcons from "./common/NavIcons";
 import Navbar from "./routes/Navbar";
+import DashCard from "./dashboard/Cards.jsx";
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -20,7 +21,10 @@ export default function Dashboard() {
       setError("Failed to log out")
     }
   }
-
+  const css={
+    "height":"100vh",
+    "float":"left",
+  }
   return (
     <>
       {/* <Card>
@@ -38,17 +42,19 @@ export default function Dashboard() {
           Log Out
         </Button>
       </div> */}
+     
       <div className="row">
         <div className="col-lg-12 col-md-12 col-sm-12 text-center bg-info">
           <Navbar />
         </div>
       </div>
       <div className="row">
-        <div className="col-lg-1 col-md-1 col-sm-2 text-center bg-info">
+        <div className="col-lg-1 col-md-1 col-sm-2 text-center bg-info" style={css}>
           <NavIcons />
         </div>
         <div className="col-lg-11 col-md-11 col-sm-10 text-left">
-          <h1>Welcome { currentUser.email }</h1>
+          <h4 className="mx-5">Welcome {currentUser.email}</h4>
+          <DashCard />
         </div>
       </div>
     </>

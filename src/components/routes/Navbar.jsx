@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext"
+import logo from '../images/logo.png'
 
 export default function Navbar() {
   const [error, setError] = useState("")
@@ -16,36 +17,36 @@ export default function Navbar() {
       setError("Failed to log out")
     }
   }
-
+  const css = {
+    "width":"100vw",
+    "overflow": "hidden",
+  }
   return (
-    <div>
-      <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+    <div style={css}>
+      <nav className="navbar navbar-expand-md bg-secondary navbar-dark">
         <Link className="navbar-brand" to="/dashboard">
-          <img src="./images/brand.png" />
+          <img src={logo} width="150" height="30" />
         </Link>
 
         <button
           className="navbar-toggler"
           type="button"
           data-toggle="collapse"
-          data-target="#collapsibleNavbar"
-        >
+          data-target="#collapsibleNavbar" >
           <span className="navbar-toggler-icon"></span>
         </button>
-
         <div className="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul className="navbar-nav mr-auto">
+          <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <form className="form-inline" action="#">
                 <input
                   className="form-control mr-sm-2"
                   type="text"
-                  placeholder="Search"
-                />
-                <button className="btn btn-outline-success" type="submit">
+                  placeholder="Search"/>
+                <button className="btn btn-outline-light" type="submit">
                   Search
                 </button>
-                <button className="btn btn-outline-success" type="btn" onClick={handleLogout}>
+                <button className="btn btn-outline-light mx-2" type="btn" onClick={handleLogout}>
                   Logout
                 </button>
               </form>
