@@ -11,11 +11,11 @@ const Profile = () => {
           <Navbar />
         </div>
       </div>
-      <div className="row">
-        <div className="col-lg-1 col-md-1 col-sm-2 text-center bg-info dashboard1">
+      <div className="row bg-new3">
+        <div className="col-lg-1 col-md-1 col-sm-2 text-center dashboard1 bg-new2">
           <NavIcons />
         </div>
-        <div className="col-lg-11 col-md-11 col-sm-10 text-left bg-danger">
+        <div className="col-lg-11 col-md-11 col-sm-10 text-left">
           <h1>Welcome to Archives Page...</h1>
         </div>
       </div>

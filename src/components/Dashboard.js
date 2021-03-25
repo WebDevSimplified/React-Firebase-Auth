@@ -45,12 +45,14 @@ export default function Dashboard() {
           <Navbar />
         </div>
       </div>
-      <div className="row">
-        <div className="col-lg-1 col-md-1 col-sm-2 text-center bg-info dashboard1">
+      <div className="row bg-new3">
+        <div className="col-lg-1 col-md-1 col-sm-2 text-center bg-new2 dashboard1 ">
           <NavIcons />
         </div>
-        <div className="col-lg-11 col-md-11 col-sm-10 text-left">
-          <h4 className="mx-5">Welcome {currentUser.email}</h4>
+        <div className="col-lg-11 col-md-11 col-sm-10 text-left my-4">
+          {
+          //<h4 className="mx-5">Welcome {currentUser.email}</h4>
+          }
           <DashCard />
         </div>
       </div>

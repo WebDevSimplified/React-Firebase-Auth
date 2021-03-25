@@ -19,7 +19,7 @@ export default function Navbar() {
   }
  
   return (
-    <div class="navb">
+    <div className="navb">
       <nav className="navbar navbar-expand-md bg-new navbar-light">
         <Link className="navbar-brand" to="/dashboard">
           <img src={logo} width="150" height="30" />
