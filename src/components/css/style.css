@@ -1,0 +1,61 @@
+.dashboard1{
+    height:100vh;
+    float:left;
+}
+.navIcon{  
+        line-height:50px;
+        height:20vh;
+}
+.rounded2{
+    border-radius: 12%;
+}/*
+.navIcon:hover{
+        opacity: .5;
+        box-shadow:0 0 0 5px rgba(#000,.4) , 0 0 0 10px  #f05f75;
+}*/
+.cardstyle{
+        padding:4px;
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+        width:50%;
+        cursor:pointer;
+}
+.navb{
+    width:100vw;
+    overflow:hidden;
+}
+.bg-new{
+    background-color:rgb(255, 153, 0);
+}
+.bg-new2{
+    background-color:rgb(78, 189, 183);
+}
+.bg-new3{
+    background-color:rgb(252, 245, 237);
+}
+.pad{
+    padding-top: 30px;
+}
+.btn-xl {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    border-color: rgb(78, 189, 183);;
+    font-size: 24px;
+    line-height:1px;
+    background-color: rgb(78, 189, 183);
+}
+.btn-xl-active{
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    border-color: rgb(78, 189, 183);
+    font-size: 24px;
+    line-height:1px;
+    background-color:rgb(255, 0, 0);
+}
+.active, .btn-xl:hover {
+    background-color: rgb(255, 0, 0);
+  }
+
