@@ -1,12 +1,13 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom";
+import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { login } = useAuth()
+  const { login, googleLogin, facebookLogin } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -25,6 +26,25 @@ export default function Login() {
 
     setLoading(false)
   }
+
+  async function googleHandle() {
+     try{
+       await googleLogin()
+       history.push("/")
+     } catch {
+       console.log("Failed to login using google");
+     }
+  }
+
+  async function facebookHandle() {
+    try{
+      await facebookLogin()
+      history.push("/")
+    } catch {
+      console.log("Failed to login using facebook");
+    }
+ }
+
 
   return (
     <>
@@ -50,8 +70,15 @@ export default function Login() {
           </div>
         </Card.Body>
       </Card>
+      
       <div className="w-100 text-center mt-2">
         Need an account? <Link to="/signup">Sign Up</Link>
+      </div>
+      <div style={{marginTop: "1rem", marginBottom: "1rem"}}>
+        <FacebookLoginButton onClick={facebookHandle} />
+      </div>
+      <div style={{marginTop: "1rem", marginBottom: "1rem"}}>
+        <GoogleLoginButton onClick={googleHandle} />
       </div>
     </>
   )

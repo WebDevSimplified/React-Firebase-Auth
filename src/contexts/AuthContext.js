@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "../firebase"
+import firebase from "firebase/app"
 
 const AuthContext = React.createContext()
 
@@ -35,6 +36,36 @@ export function AuthProvider({ children }) {
     return currentUser.updatePassword(password)
   }
 
+  function googleLogin() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    return firebase.auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+      var credential = result.credential;
+      var token = credential.accessToken;
+      var user = result.user;
+      console.log(user);
+      }).catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function facebookLogin() {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    return firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      var credential = result.credential;
+      var user = result.user;
+      var accessToken = credential.accessToken;
+      console.log(user);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user)
@@ -51,7 +82,9 @@ export function AuthProvider({ children }) {
     logout,
     resetPassword,
     updateEmail,
-    updatePassword
+    updatePassword,
+    googleLogin,
+    facebookLogin
   }
 
   return (

@@ -1,0 +1,32 @@
+.card-image {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+}
+.g_body{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .g-button{
+    border: 1px solid rgb(66, 133, 244);
+    background: rgb(66, 133, 244);
+    display: flex;
+  }
+  
+  .g-logo{
+    width: 21px;
+    height: 21px;
+    padding: 8px 10px;
+    background: white;
+  }
+  
+  .g-text{
+    font-size: 16px;
+    padding: 8px 10px;
+    color: white;
+    font-family: roboto;
+    text-align: center;
+  }
