@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-import firebase from "firebase/app"
+import firebase from "firebase/app";
+import "./styles.css";
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -45,11 +46,16 @@ export default function Dashboard() {
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <strong>Email:</strong> {currentUser.email} <br />
-          {currentUser.displayName ? <strong>Name: {currentUser.displayName}</strong>  : null}
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
+          <div style={{textAlign: "center"}}>
+            <div style={{marginBottom: "1rem"}}>
+              {currentUser.photoURL ? <img className="card-image" src={currentUser.photoURL} /> : null}
+            </div>
+            <strong>Email:</strong> {currentUser.email} <br />
+            {currentUser.displayName ? <p><strong>Name: </strong>{currentUser.displayName}</p>  : null}
+          </div>         
+          {!currentUser.displayName ? <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
             Update Profile
-          </Link>
+          </Link> : null}
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">

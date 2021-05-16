@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom";
+import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
 
 export default function Login() {
   const emailRef = useRef()
@@ -69,15 +70,15 @@ export default function Login() {
           </div>
         </Card.Body>
       </Card>
-      <Button className="w-100" onClick={googleHandle}>
-              Signin With Google
-      </Button>
-      <br /><br />
-      <Button className="w-100" onClick={facebookHandle}>
-              Signin With Facebook
-      </Button>
+      
       <div className="w-100 text-center mt-2">
         Need an account? <Link to="/signup">Sign Up</Link>
+      </div>
+      <div style={{marginTop: "1rem", marginBottom: "1rem"}}>
+        <FacebookLoginButton onClick={facebookHandle} />
+      </div>
+      <div style={{marginTop: "1rem", marginBottom: "1rem"}}>
+        <GoogleLoginButton onClick={googleHandle} />
       </div>
     </>
   )
