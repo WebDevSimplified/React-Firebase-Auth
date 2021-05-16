@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom"
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { login } = useAuth()
+  const { login, googleLogin, facebookLogin } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -25,6 +25,25 @@ export default function Login() {
 
     setLoading(false)
   }
+
+  async function googleHandle() {
+     try{
+       await googleLogin()
+       history.push("/")
+     } catch {
+       console.log("Failed to login using google");
+     }
+  }
+
+  async function facebookHandle() {
+    try{
+      await facebookLogin()
+      history.push("/")
+    } catch {
+      console.log("Failed to login using facebook");
+    }
+ }
+
 
   return (
     <>
@@ -50,6 +69,13 @@ export default function Login() {
           </div>
         </Card.Body>
       </Card>
+      <Button className="w-100" onClick={googleHandle}>
+              Signin With Google
+      </Button>
+      <br /><br />
+      <Button className="w-100" onClick={facebookHandle}>
+              Signin With Facebook
+      </Button>
       <div className="w-100 text-center mt-2">
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
