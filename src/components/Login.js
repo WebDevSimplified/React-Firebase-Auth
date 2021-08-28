@@ -12,11 +12,11 @@ export default function Login() {
   const history = useHistory()
 
   async function handleSubmit(e) {
-    e.preventDefault
+    e.preventDefault()
 
     try {
       setError("")
-      setLoading(true
+      setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
       setLoading(false)
       history.push("/")
