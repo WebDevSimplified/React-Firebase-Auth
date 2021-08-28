@@ -23,12 +23,12 @@ export default function Signup() {
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
+      setLoading(false)
       history.push("/")
     } catch {
+      setLoading(false)
       setError("Failed to create an account")
     }
-
-    setLoading(false)
   }
 
   return (

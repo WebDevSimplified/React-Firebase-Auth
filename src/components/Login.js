@@ -18,12 +18,12 @@ export default function Login() {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
+      setLoading(false)
       history.push("/")
     } catch {
+      setLoading(false)
       setError("Failed to log in")
     }
-
-    setLoading(false)
   }
 
   return (
@@ -54,5 +54,5 @@ export default function Login() {
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
     </>
-  )
+  
 }
