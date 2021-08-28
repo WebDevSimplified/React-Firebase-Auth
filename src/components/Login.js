@@ -1,28 +1,28 @@
-import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import React, { useRef, useState } from "react"
+import { Form, Button, Card, Alert } from "react-bootstrap"
+import { useAuth } from "../contexts/AuthContext"
+import { Link, useHistory } from "react-router-dom"
 
 export default function Login() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const { login } = useAuth();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const { login } = useAuth()
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false
+  const history = useHistory
 
   async function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault
 
     try {
-      setError("");
-      setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      setLoading(false);
-      history.push("/");
+      setError("")
+      setLoading(true
+      await login(emailRef.current.value, passwordRef.current.value)
+      setLoading(false)
+      history.push("/")
     } catch {
-      setLoading(false);
-      setError("Failed to log in");
+      setLoading(false)
+      setError("Failed to log in")
     }
   }
 
@@ -54,5 +54,5 @@ export default function Login() {
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
     </>
-  );
+  
 }
