@@ -3,6 +3,8 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 
+import logo from '../image/logo.svg'
+
 export default function UpdateProfile() {
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -15,7 +17,7 @@ export default function UpdateProfile() {
   function handleSubmit(e) {
     e.preventDefault()
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
+      return setError("Senha não são iguais")
     }
 
     const promises = []
@@ -34,7 +36,7 @@ export default function UpdateProfile() {
         history.push("/")
       })
       .catch(() => {
-        setError("Failed to update account")
+        setError("Ocorreu um erro na alteração")
       })
       .finally(() => {
         setLoading(false)
