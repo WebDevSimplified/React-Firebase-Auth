@@ -3,6 +3,8 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
 
+import logo from '../image/logo.svg'
+
 export default function ForgotPassword() {
   const emailRef = useRef()
   const { resetPassword } = useAuth()
@@ -28,27 +30,28 @@ export default function ForgotPassword() {
 
   return (
     <>
-      <Card>
+      <Card className="shadow p-3 mb-5 bg-white rounded">
         <Card.Body>
-          <h2 className="text-center mb-4">Password Reset</h2>
+        <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
+          <h2 className="text-center mb-4 mt-4">RECUPERAR SENHA</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           {message && <Alert variant="success">{message}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>E-mail</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
-              Reset Password
+              RECUPERAR 
             </Button>
           </Form>
           <div className="w-100 text-center mt-3">
-            <Link to="/login">Login</Link>
+            <Link to="/login">ENTRAR</Link>
           </div>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup">Sign Up</Link>
+        Cricar conta? <Link to="/signup">Criar</Link>
       </div>
     </>
   )
