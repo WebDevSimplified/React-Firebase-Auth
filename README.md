@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-deploy in (https://react-firebase-auth-mu.vercel.app/)
+deploy in [vercel](https://react-firebase-auth-mu.vercel.app/)
 
 
 
