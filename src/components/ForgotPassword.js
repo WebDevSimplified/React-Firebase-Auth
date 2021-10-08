@@ -18,11 +18,11 @@ export default function ForgotPassword() {
     try {
       setMessage("")
       setError("")
-      setLoading(true)
+      setLoading(false)
       await resetPassword(emailRef.current.value)
-      setMessage("Check your inbox for further instructions")
+      setMessage("Verifique sua caixa de e-mail")
     } catch {
-      setError("Failed to reset password")
+      setError("Erro na recuperação de e-mail")
     }
 
     setLoading(false)

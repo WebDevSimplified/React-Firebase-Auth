@@ -9,6 +9,8 @@ import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
 
+
+
 function App() {
   return (
     <Container
@@ -24,6 +26,7 @@ function App() {
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
+              
             </Switch>
           </AuthProvider>
         </Router>
