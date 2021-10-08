@@ -3,8 +3,6 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
 
-import logo from '../image/logo.svg'
-
 export default function ForgotPassword() {
   const emailRef = useRef()
   const { resetPassword } = useAuth()
@@ -20,9 +18,9 @@ export default function ForgotPassword() {
       setError("")
       setLoading(true)
       await resetPassword(emailRef.current.value)
-      setMessage("Verifique sua conta de e-mail e recupere sua senha")
+      setMessage("Check your inbox for further instructions")
     } catch {
-      setError("Falha na recuperação de senha")
+      setError("Failed to reset password")
     }
 
     setLoading(false)
@@ -30,28 +28,27 @@ export default function ForgotPassword() {
 
   return (
     <>
-      <Card className="shadow p-3 mb-5 bg-white rounded">
+      <Card>
         <Card.Body>
-        <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
-          <h2 className="text-center mb-4">RECUPERAR A SENHA</h2>
+          <h2 className="text-center mb-4">Password Reset</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           {message && <Alert variant="success">{message}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required placeholder="Digite seu e-mail"/>
+              <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
-            <Button disabled={loading} className="w-100 mt-4" type="submit">
-              RECUPERAR 
+            <Button disabled={loading} className="w-100" type="submit">
+              Reset Password
             </Button>
           </Form>
-          <div className="w-100 text-center mt-4">
-            <Link to="/login">ENTRAR NA CONTA</Link>
+          <div className="w-100 text-center mt-3">
+            <Link to="/login">Login</Link>
           </div>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Crie uma conta! <Link to="/signup">CRIAR </Link>
+        Need an account? <Link to="/signup">Sign Up</Link>
       </div>
     </>
   )
