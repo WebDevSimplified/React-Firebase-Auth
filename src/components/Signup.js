@@ -3,6 +3,8 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 
+import logo from '../image/logo.svg'
+
 export default function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -33,31 +35,32 @@ export default function Signup() {
 
   return (
     <>
-      <Card>
+      <Card className="shadow p-3 mb-5 bg-white rounded">
         <Card.Body>
-          <h2 className="text-center mb-4">Sign Up</h2>
+        <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
+          <h2 className="text-center mb-4">CRIAR CONTA</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
+            <Form.Group className="mb-4"id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control type="email" ref={emailRef} required placeholder="Digite seu email"/>
             </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+            <Form.Group className="mb-4" id="password">
+              <Form.Label>Senha</Form.Label>
+              <Form.Control type="password" ref={passwordRef} required placeholder="Digite sua senha"/>
             </Form.Group>
-            <Form.Group id="password-confirm">
-              <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control type="password" ref={passwordConfirmRef} required />
+            <Form.Group className="mb-4" id="password-confirm">
+              <Form.Label>Confirme sua senha.</Form.Label>
+              <Form.Control className="mb-4"type="password" ref={passwordConfirmRef} required placeholder="Confirme sua senha"/>
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
-              Sign Up
+            <Button disabled={loading} className="w-100 mt-4" type="submit">
+              CRIAR CONTA
             </Button>
           </Form>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
+        Você já tem uma conta? <Link to="/login">Fazer login</Link>
       </div>
     </>
   )
