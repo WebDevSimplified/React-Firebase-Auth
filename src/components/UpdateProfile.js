@@ -48,11 +48,11 @@ export default function UpdateProfile() {
       <Card className="shadow p-3 mb-5 bg-white rounded">
         <Card.Body>
         <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
-          <h2 className="text-center mb-4">Atualização de dados</h2>
+          <h2 className="text-center mb-4">Atualizar dados</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+              <Form.Label className="mt-4 mb-0" >E-mail</Form.Label>
               <Form.Control
                 type="email"
                 ref={emailRef}
@@ -61,29 +61,29 @@ export default function UpdateProfile() {
               />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label className="mt-4 mb-0">Senha</Form.Label>
               <Form.Control
                 type="password"
                 ref={passwordRef}
-                placeholder="Leave blank to keep the same"
+                placeholder="Nova senha"
               />
             </Form.Group>
             <Form.Group id="password-confirm">
-              <Form.Label>Password Confirmation</Form.Label>
+              <Form.Label className="mt-4 mb-0">Confirmar senha</Form.Label>
               <Form.Control
                 type="password"
                 ref={passwordConfirmRef}
-                placeholder="Leave blank to keep the same"
+                placeholder="repita sua senha"
               />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
-              Update
+             Atualizar
             </Button>
           </Form>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        <Link to="/">Cancel</Link>
+        <Link to="/">Cancelar</Link>
       </div>
     </>
   )

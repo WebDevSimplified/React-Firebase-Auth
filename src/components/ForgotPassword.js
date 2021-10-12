@@ -33,19 +33,19 @@ export default function ForgotPassword() {
       <Card className="shadow p-3 mb-5 bg-white rounded">
         <Card.Body>
         <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
-          <h2 className="text-center mb-4 mt-4">RECUPERAR SENHA</h2>
+          <h2 className="text-center mt-4">RECUPERAR SENHA</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           {message && <Alert variant="success">{message}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label>E-mail</Form.Label>
+              <Form.Label className="mt-4 mb-0">E-mail</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
               RECUPERAR 
             </Button>
           </Form>
-          <div className="w-100 text-center mt-3">
+          <div className="w-100 text-center mt-4">
             <Link to="/login">ENTRAR</Link>
           </div>
         </Card.Body>
