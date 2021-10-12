@@ -3,7 +3,10 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 // import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 
+import firebase from "firebase"
+
 import logo from '../image/logo.svg'
+import googleIconImg from '../image/google-icon.svg';
 
 export default function Login() {
   const emailRef = useRef()
@@ -12,6 +15,8 @@ export default function Login() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
+
+ 
 
   async function handleSubmit(e) {
     // e.preventDefault()
@@ -27,7 +32,26 @@ export default function Login() {
 
     // setLoading(false)
   }
+//login google incio
 
+  async function handLoginGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+  
+  history.push("/")
+  })
+  try {
+    setError("")
+    setLoading(true)
+    history.push("/")
+  } catch{
+    setError("Algo deu errado")
+    
+  }
+  setLoading(false)
+}
+// login google final 
   return (
     <>
       <Card className="shadow p-3 mb-5 bg-white rounded">
@@ -35,13 +59,17 @@ export default function Login() {
         <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
           <h2 className="text-center mb-4 mt-4">ENTRAR NA CONTA</h2>
           {error && <Alert variant="danger">{error}</Alert>}
+          <button onClick={handLoginGoogle}  className="w-100 mt-4 mb-4 btn btn-primary btn-lg btn btn-danger" >
+            <img className="pr-4" src={googleIconImg} alt="Logo do Google" />
+             Crie com o Google
+          </button>
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label className="mt-4">E-mail</Form.Label>
+              <Form.Label className="mt-1 mb-0">E-mail</Form.Label>
               <Form.Control type="email" ref={emailRef} required placeholder="Digite seu e-mail" />
             </Form.Group>
-            <Form.Group  className="mt-4" id="password">
-              <Form.Label>Senha</Form.Label>
+            <Form.Group  id="password">
+              <Form.Label className="mb-0">Senha</Form.Label>
               <Form.Control className="form-control Default input" type="password" ref={passwordRef} required placeholder="Digite sua senha!" />
             </Form.Group>
             <Button disabled={loading} className="w-100 mt-4" type="submit">
@@ -58,4 +86,5 @@ export default function Login() {
       </div>
     </>
   )
-}
+
+  }
