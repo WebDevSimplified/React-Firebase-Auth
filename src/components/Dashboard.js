@@ -31,7 +31,6 @@ export default function Dashboard() {
           <div className="user-info text-center mb-4 ">
                 <img className="rounded-circle text-center" src={currentUser.photoURL} alt={currentUser.displayName} />
                 <p className="font-weight-bold mb-4">{currentUser.displayName}</p>
-              
               </div>
           
           <Link to="/update-profile" className="btn btn-primary w-100 mt-3">

@@ -12,12 +12,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
 
-  //Login Google
-
   
-
-
-  //login Google
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password)

@@ -1,6 +1,6 @@
 import React, { useRef, useState,img} from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-// import { useAuth } from "../contexts/AuthContext"
+import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 
 import firebase from "firebase"
@@ -11,45 +11,45 @@ import googleIconImg from '../image/google-icon.svg';
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  // const { login } = useAuth()
+  const { login } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
 
- 
-
   async function handleSubmit(e) {
-    // e.preventDefault()
+    e.preventDefault()
+ 
+    try {
+      setError("")
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
+      history.push("/")
+    } catch {
+      setError("Senhar ou e-mail incorreto")
+    }
+    
 
-    // try {
-    //   setError("")
-    //   setLoading(true)
-    //   // await login(emailRef.current.value, passwordRef.current.value)
-    //   history.push("/")
-    // } catch {
-    //   setError("Failed to log in")
-    // }
+    setLoading(false)
+  } 
 
-    // setLoading(false)
-  }
 //login google incio
 
   async function handLoginGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
   
-  history.push("/")
+    const provider = new firebase.auth.GoogleAuthProvider();
+    await firebase.auth().signInWithPopup(provider).then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    
   })
   try {
     setError("")
     setLoading(true)
-    history.push("/")
+    
   } catch{
-    setError("Algo deu errado")
+    setError("Algo deu errado, tente novamente")
     
   }
-  setLoading(false)
+  history.push("/")
 }
 // login google final 
   return (
