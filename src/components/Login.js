@@ -16,21 +16,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const history = useHistory()
 
-  //login google incio
-
-async function handLoginGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider).then((result) => {
-  /** @type {firebase.auth.OAuthCredential} */
  
-  // ...
-  history.push("/")
-}).catch((error) => {
-  setError("Algo deu errado")
-  console.log("user")
-});
-}
-// login google final 
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -46,7 +32,26 @@ async function handLoginGoogle() {
 
     setLoading(false)
   }
+//login google incio
 
+  async function handLoginGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+  
+  history.push("/")
+  })
+  try {
+    setError("")
+    setLoading(true)
+    history.push("/")
+  } catch{
+    setError("Algo deu errado")
+    
+  }
+  setLoading(false)
+}
+// login google final 
   return (
     <>
       <Card className="shadow p-3 mb-5 bg-white rounded">
