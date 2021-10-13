@@ -45,7 +45,7 @@ export default function UpdateProfile() {
 
   return (
     <>
-      <Card className="shadow p-3 mb-5 bg-white rounded">
+      <Card className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <Card.Body>
         <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
           <h2 className="text-center mb-4">Atualizar dados</h2>

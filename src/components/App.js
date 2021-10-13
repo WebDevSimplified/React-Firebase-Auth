@@ -14,10 +14,10 @@ import UpdateProfile from "./UpdateProfile"
 function App() {
   return (
     <Container
-      className="d-flex align-items-center justify-content-center"
+      className="d-flex align-items-center justify-content-center p-3 mb-2 bg-dark text-white"
       style={{ minHeight: "100vh" }}
     >
-      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <div className="p-3 mb-2 bg-dark text-white w-100" style={{ maxWidth: "400px" }}>
         <Router>
           <AuthProvider>
             <Switch>

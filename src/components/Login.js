@@ -54,14 +54,14 @@ export default function Login() {
 // login google final 
   return (
     <>
-      <Card className="shadow p-3 mb-5 bg-white rounded">
+      <Card className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <Card.Body>
         <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
           <h2 className="text-center mb-4 mt-4">ENTRAR NA CONTA</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <button onClick={handLoginGoogle}  className="w-100 mt-4 mb-4 btn btn-primary btn-lg btn btn-danger" >
+          <button onClick={handLoginGoogle}  className="w-100 mt-4 mb-4 btn-lg btn btn-danger" >
             <img className="pr-4" src={googleIconImg} alt="Logo do Google" />
-             Crie com o Google
+             Logar com Google
           </button>
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
@@ -82,7 +82,7 @@ export default function Login() {
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        Crie uma conta! <Link to="/signup">Criar conta</Link>
+        Crie uma conta! <Link className="btn btn-link" to="/signup">Criar conta</Link>
       </div>
     </>
   )

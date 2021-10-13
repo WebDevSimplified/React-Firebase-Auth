@@ -39,24 +39,29 @@ export default function Signup() {
     setLoading(false)
   }
 //Login google incio
-  async function handLoginGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider).then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
-   
-    // ...
-    history.push("/")
-  }).catch((error) => {
-    setError("Algo deu errado")
-    console.log();
-  });
+async function handLoginGoogle() {
+  
+  const provider = new firebase.auth.GoogleAuthProvider();
+  await firebase.auth().signInWithPopup(provider).then((result) => {
+  /** @type {firebase.auth.OAuthCredential} */
+  
+})
+try {
+  setError("")
+  setLoading(true)
+  
+} catch{
+  setError("Algo deu errado, tente novamente")
+  
+}
+history.push("/")
 
 // login google fim 
   }
 
   return (
     <>
-      <Card className="shadow p-3 mb-5 bg-white rounded">
+      <Card className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <Card.Body>
     
         <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
