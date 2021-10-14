@@ -3,6 +3,10 @@ import { Form, Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 
+import firebase from 'firebase'
+import 'firebase/database'
+
+
 import logo from '../image/logo.svg'
 
 export default function Dashboard() {
@@ -20,6 +24,50 @@ export default function Dashboard() {
       setError("Failed to log out")
     }
   }
+ 
+  //criar database realtime 
+  
+  const [newChave, setNewChave] = useState('')
+  const [newCity, setNewcity] = useState('')
+  const [newName, setNewName] = useState('')
+  
+  
+
+async function handCreatClient(event){
+  event.preventDefault()
+
+  if (newChave.trim()===''){
+    return
+  }
+  if (newName.trim()===''){
+    return
+  }
+  if (newCity.trim()===''){
+    return
+  }
+  
+  
+   console.log(newName, newCity, newChave)
+
+  const clientRef = firebase.database().ref('clients') 
+
+  const firebaseClient = await clientRef.push({
+    name: newName,
+    authorId: currentUser?.uid,
+    city: newCity,
+    chave: newChave,
+  })
+
+
+}
+
+
+
+
+
+
+
+// fim do criar database
 
   return (
     <>
@@ -41,20 +89,26 @@ export default function Dashboard() {
       <Card.Footer className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <h2 className="text-center d-block mb-4">CRIE SUA CONTA PIX</h2>
         <p className="text-center"> Coloque seus dados já cadastrado no seu banco para gerar o PIX com seus dados</p>
-      <Form >
-            <Form.Group className="mb-4 mt-4"id="email">
+      <Form onSubmit={handCreatClient}>
+            <Form.Group className="mb-4 mt-4"id="chave">
               <Form.Label className="mb-0">Chave PIX</Form.Label>
-              <Form.Control type="email" required placeholder="Digite sua chave PIX"/>
+              <Form.Control type="text" name="newChave"required placeholder="Digite sua chave PIX" 
+              onChange={(event) => setNewChave(event.target.value)}
+              />
               <small  className="form-text text-muted">PIX cadastrada (Telefone, E-mail, CPF, CNPJ ou chave Aleatória) </small>
             </Form.Group>
-            <Form.Group className="mb-4" id="password">
+            <Form.Group className="mb-4" id="name">
               <Form.Label className="mb-0">Nome do beneficiário</Form.Label>
-              <Form.Control type="password"  required placeholder="Nome beneficiário"/>
+              <Form.Control type="text" name="name" required placeholder="Nome beneficiário"
+              onChange={(event) => setNewName(event.target.value)}
+               />
               <small  className="form-text text-muted">Nome do beneficiário (até 25 letras). </small>
             </Form.Group>
-            <Form.Group className="mb-4" id="password-confirm">
+            <Form.Group className="mb-4" id="city">
               <Form.Label className="mb-0">Digite a cidade</Form.Label>
-              <Form.Control type="password" required placeholder="Digite a cidade"/>
+              <Form.Control type="text" name="city"required placeholder="Digite a cidade" 
+              onChange={(event) => setNewcity(event.target.value)}
+              />
               <small  className="mt-0 form-text text-muted">Cidade do beneficiário ou da transação (até 15 letras) </small>
             </Form.Group>
             <Button className="w-100" type="submit">
