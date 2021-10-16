@@ -38,7 +38,7 @@ export default function Login() {
   
     const provider = new firebase.auth.GoogleAuthProvider();
     await firebase.auth().signInWithPopup(provider).then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
+   
     
   })
   try {
@@ -49,7 +49,7 @@ export default function Login() {
     setError("Algo deu errado, tente novamente")
     
   }
-  history.push("/")
+  history.push("/Profile")
 }
 // login google final 
   return (

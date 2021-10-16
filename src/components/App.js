@@ -8,20 +8,24 @@ import Login from "./Login"
 import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
+import Profile from "./Profile"
 
 
 
 function App() {
   return (
+    
     <Container
       className="d-flex align-items-center justify-content-center p-3 mb-2 "
       style={{ minHeight: "100vh" }}
     >
-      <div className="p-3 mb-2 bg-dark w-100" style={{ maxWidth: "400px" }}>
+      <div className="p-3 mb-2 w-100" style={{ maxWidth: "400px" }}>
+      
         <Router>
           <AuthProvider>
             <Switch>
               {<PrivateRoute exact path="/" component={Dashboard} />}
+              <Route path="/profile" component={Profile} />
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />}
               <Route path="/login" component={Login} />
@@ -30,8 +34,10 @@ function App() {
             </Switch>
           </AuthProvider>
         </Router>
+        
       </div>
     </Container>
+    
   )
 }
 

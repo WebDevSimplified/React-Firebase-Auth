@@ -47,7 +47,7 @@ async function handCreatClient(event){
   }
   
   
-   console.log(newName, newCity, newChave)
+  //  console.log(newName, newCity, newChave)
 
   const clientRef = firebase.database().ref('clients') 
 
@@ -57,16 +57,9 @@ async function handCreatClient(event){
     city: newCity,
     chave: newChave,
   })
-
+  history.push(`/profile`)
 
 }
-
-
-
-
-
-
-
 // fim do criar database
 
   return (
