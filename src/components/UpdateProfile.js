@@ -17,7 +17,7 @@ export default function UpdateProfile() {
   function handleSubmit(e) {
     e.preventDefault()
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Senha não são iguais")
+      return setError("Senha não são iguais. Digite novamente")
     }
 
     const promises = []
@@ -45,14 +45,14 @@ export default function UpdateProfile() {
 
   return (
     <>
-      <Card className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
+      <Card className="text-light shadow p-3 mb-5 bg-secondary rounded p-3 mb-2">
         <Card.Body>
         <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
           <h2 className="text-center mb-4">Atualizar dados</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
-              <Form.Label className="mt-4 mb-0" >E-mail</Form.Label>
+              <Form.Label className="mb-0" >E-mail</Form.Label>
               <Form.Control
                 type="email"
                 ref={emailRef}
@@ -61,7 +61,7 @@ export default function UpdateProfile() {
               />
             </Form.Group>
             <Form.Group id="password">
-              <Form.Label className="mt-4 mb-0">Senha</Form.Label>
+              <Form.Label className="mt-0 mb-0">Senha</Form.Label>
               <Form.Control
                 type="password"
                 ref={passwordRef}
@@ -69,7 +69,7 @@ export default function UpdateProfile() {
               />
             </Form.Group>
             <Form.Group id="password-confirm">
-              <Form.Label className="mt-4 mb-0">Confirmar senha</Form.Label>
+              <Form.Label className="mb-0">Confirmar senha</Form.Label>
               <Form.Control
                 type="password"
                 ref={passwordConfirmRef}

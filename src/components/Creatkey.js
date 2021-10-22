@@ -10,21 +10,27 @@ import 'firebase/database'
 import logo from '../image/logo.svg'
 
 export default function Dashboard() {
+  // const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const history = useHistory()
+
+  
+  
 
   async function handleLogout() {
     setError("")
 
     try {
       await logout()
-      history.push("/login")
+      history.push("/")
     } catch {
-      setError("Failed to log out")
+      setError("Falha para fazer logout")
     }
   }
- 
+  // redirecionar sem login l
+
+
   //criar database realtime 
   
   const [newChave, setNewChave] = useState('')
@@ -49,9 +55,9 @@ async function handCreatClient(event){
   
   //  console.log(newName, newCity, newChave)
 
-  const clientRef = firebase.database().ref('clients') 
+  const clientRef = firebase.database().ref('clients').child(currentUser?.uid);
 
-  const firebaseClient = await clientRef.push({
+  const firebaseClient = await clientRef.set({
     name: newName,
     authorId: currentUser?.uid,
     city: newCity,
