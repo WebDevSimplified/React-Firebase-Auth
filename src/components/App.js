@@ -16,7 +16,7 @@ function App() {
   return (
     
     <Container
-      className="d-flex align-items-center justify-content-center p-2 mb-2 "
+      className="d-flex align-items-center justify-content-center "
       style={{ minHeight: "100vh" }} >
       <div className="p-3 mb-2 w-100" style={{ maxWidth: "400px" }}>
         <Router>

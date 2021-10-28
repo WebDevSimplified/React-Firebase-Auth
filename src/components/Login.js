@@ -49,7 +49,7 @@ export default function Login() {
     setError("Algo deu errado, tente novamente")
     
   }
-  history.push("/Profile")
+  history.push("/Creatkey")
 }
 // login google final 
   return (
