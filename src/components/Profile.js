@@ -68,8 +68,13 @@ async function handleLogout() {
   return (
     <>
       <Card className="text-light shadow p-3 mb-5 bg-secondary rounded p-3 mb-2">
-
+ <div className="w-100 text-right">
+      <Button className="mr-03 badge badge-secondary" variant="link" onClick={handleLogout}>
+          SAIR
+        </Button>
+      </div>
         <Card.Body>
+       
           <img src={logo} alt="Gera pix" className="card-img-top mx-auto d-block mb-4" />
           <h4 className="text-center mb-4 text-black">SUA CONTA</h4>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -82,31 +87,30 @@ async function handleLogout() {
       </Card>
 
       <Card.Footer className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
-      <div className="user-info text-center mb-4 ">
+      <div className="user-info text-center mb-4">
             <img className="rounded-circle text-center" src={user.photoURL} alt={user.displayName} />
             <p className="font-weight-bold mb-4">{user.displayName}</p>
 
           </div>
-        <h4 className="text-center border border-info mb-4 mp-4">SUA CONTA PIX</h4>
+          <div className="user-info"> 
+        <h4 className="text-center mb-4 mp-4">SUA CONTA PIX</h4>
         <p className=" mb-0"> NOME:</p>
-        <p className="text-uppercase border font-italic font-weight-light border-info"> {name}</p>
+        <p className="text-decoration-underline font-italic border-bottom "> {name}</p>
         <p className=" mb-0"> CIDADE:</p>
-        <p className="text-uppercase border font-italic font-weight-light border-info"> {city}</p>
+        <p className="text-decoration-underline font-italic border-bottom "> {city}</p>
         <p className="mb-0"> CHAVE PIX:</p>
-        <p className="text-uppercase border font-italic font-weight-light border-info"> {chave}</p>
-        <Link className="btn btn-primary btn-sm" to="/UpData">Editar</Link>
+        <p className="text-decoration-underline font-italic border-bottom "> {chave}</p>
+        </div> 
+        <div className="pl-3 pr-3 row justify-content-between">
+        <Link className="btn btn-primary btn-sm" to="/UpData">Atualizar chave</Link>
         
-
-      </Card.Footer>
-
-      <div className="w-100 text-center mt-2">
-        <Link to="/update-profile" className="btn btn-primary mt-3">
+        <Link to="/update-profile" className="btn btn-primary btn-sm ">
           Atualizar senha
         </Link>
-        <Button variant="link" onClick={handleLogout}>
-          SAIR
-        </Button>
-      </div>
+        </div>
+
+      </Card.Footer>
+      
     </>
   )
 }

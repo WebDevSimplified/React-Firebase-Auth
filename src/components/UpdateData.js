@@ -67,6 +67,11 @@ async function handCreatClient(event){
   return (
     <>
       <Card className="text-light shadow bg-dark text-white rounded p-3">
+      <div className="w-100 text-right">
+      <Button className="mr-03 badge badge-secondary" variant="link" onClick={handleLogout}>
+          SAIR
+        </Button>
+      </div>
         <Card.Body>
         <img src={logo}alt="Gera pix" className="card-img-top mx-auto d-block " />
           {error && <Alert variant="danger">{error}</Alert>}
@@ -80,29 +85,29 @@ async function handCreatClient(event){
         <h4 className="text-center border border-alert d-block mb-4">ATUALIZE SEU DADOS PIX</h4>
         <p className="text-center"> verifique se seus dados já estão cadastrados no seu banco para gerar o PIX</p>
       <Form onSubmit={handCreatClient}>
-            <Form.Group className="mb-4 mt-4"id="chave">
+            <Form.Group className="mb-4"id="chave">
               <Form.Label className="mb-0">Chave PIX</Form.Label>
-              <Form.Control type="text" name="newChave"required placeholder="Digite sua chave PIX" 
+              <Form.Control className="form-control-sm" type="text" name="newChave"required placeholder="Digite sua chave PIX" 
               onChange={(event) => setNewChave(event.target.value)}
               />
               <small  className="form-text text-muted">Chave PIX já cadastrada na instituição financeira (Telefone, E-mail, CPF, CNPJ ou chave Aleatória) </small>
             </Form.Group>
             <Form.Group className="mb-4" id="name">
               <Form.Label className="mb-0">Nome do beneficiário</Form.Label>
-              <Form.Control type="text" name="name" required placeholder="Nome beneficiário"
+              <Form.Control className="form-control-sm" type="text" name="name" required placeholder="Nome beneficiário"
               onChange={(event) => setNewName(event.target.value)}
                />
               <small  className="form-text text-muted">Nome do beneficiário (até 25 letras). </small>
             </Form.Group>
-            <Form.Group className="mb-4" id="city">
+            <Form.Group className="mb-4 " id="city">
               <Form.Label className="mb-0">Digite a cidade</Form.Label>
-              <Form.Control type="text" name="city"required placeholder="Digite a cidade" 
+              <Form.Control className="form-control-sm" type="text" name="city"required placeholder="Digite a cidade" 
               onChange={(event) => setNewcity(event.target.value)}
               />
               <small  className="mt-0 form-text text-muted">Cidade do beneficiário ou da transação (até 15 letras) </small>
             </Form.Group>
             <Button className="w-100" type="submit">
-              ATUALIZAR CONTA
+              Atualizar Chave
             </Button>
           </Form>
 </Card.Footer>
@@ -110,9 +115,6 @@ async function handCreatClient(event){
       <div className="text-center">
         <Link to="/">Cancelar</Link>
       </div>
-        <Button variant="link" onClick={handleLogout}>
-          SAIR
-        </Button>
       </div>
     </>
   )
