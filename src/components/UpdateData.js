@@ -9,14 +9,11 @@ import 'firebase/database'
 
 import logo from '../image/logo.png'
 
-export default function Dashboard() {
+export default function UpData() {
   
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const history = useHistory()
-
-  
-  
 
   async function handleLogout() {
     setError("")
@@ -31,7 +28,7 @@ export default function Dashboard() {
   // redirecionar sem login l
 
 
-  //criar database realtime 
+  //Atualizar  database realtime 
   
   const [newChave, setNewChave] = useState('')
   const [newCity, setNewcity] = useState('')
@@ -54,9 +51,9 @@ async function handCreatClient(event){
   
   
 
-  const clientRef = firebase.database().ref('clients').child(currentUser?.uid);
+   const clientRef = firebase.database().ref('clients').child(currentUser?.uid);
 
-  const firebaseClient = await clientRef.set({
+   const firebaseClient = await clientRef.set({
     name: newName,
     authorId: currentUser?.uid,
     city: newCity,
@@ -65,35 +62,30 @@ async function handCreatClient(event){
   history.push("/profile")
 
 }
-// fim do criar database
+// fim do Atualizar database
 
   return (
     <>
-      <Card className="text-light shadow bg-dark text-white p-3 mb-5 rounded p-3 mb-2">
+      <Card className="text-light shadow bg-dark text-white rounded p-3">
         <Card.Body>
-        <img src={logo}alt="Gera pix" className="card-img-top mx-auto d-block mb-4" />
-          <h2 className="text-center mb-4 font-weight-bold text-black">CONTA</h2>
+        <img src={logo}alt="Gera pix" className="card-img-top mx-auto d-block " />
           {error && <Alert variant="danger">{error}</Alert>}
-          <div className="user-info text-center mb-4 ">
-                <img className="rounded-circle text-center" src={currentUser.photoURL} alt={currentUser.displayName} />
+          <div className="user-info text-center">
+                <img className="rounded-circle  mb-4  text-center" src={currentUser.photoURL} alt={currentUser.displayName} />
                 <p className="font-weight-bold mb-4">{currentUser.displayName}</p>
               </div>
-          
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
-            Atualizar dados
-          </Link>
         </Card.Body>
       </Card>
-      <Card.Footer className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
-        <h2 className="text-center d-block mb-4">CRIE SUA CONTA PIX</h2>
-        <p className="text-center"> Coloque seus dados já cadastrado no seu banco para gerar o PIX com seus dados</p>
+      <Card.Footer className="shadow mt-2 p-3 bg-dark text-white rounded">
+        <h4 className="text-center border border-alert d-block mb-4">ATUALIZE SEU DADOS PIX</h4>
+        <p className="text-center"> verifique se seus dados já estão cadastrados no seu banco para gerar o PIX</p>
       <Form onSubmit={handCreatClient}>
             <Form.Group className="mb-4 mt-4"id="chave">
               <Form.Label className="mb-0">Chave PIX</Form.Label>
               <Form.Control type="text" name="newChave"required placeholder="Digite sua chave PIX" 
               onChange={(event) => setNewChave(event.target.value)}
               />
-              <small  className="form-text text-muted">PIX cadastrada (Telefone, E-mail, CPF, CNPJ ou chave Aleatória) </small>
+              <small  className="form-text text-muted">Chave PIX já cadastrada na instituição financeira (Telefone, E-mail, CPF, CNPJ ou chave Aleatória) </small>
             </Form.Group>
             <Form.Group className="mb-4" id="name">
               <Form.Label className="mb-0">Nome do beneficiário</Form.Label>
@@ -110,11 +102,14 @@ async function handCreatClient(event){
               <small  className="mt-0 form-text text-muted">Cidade do beneficiário ou da transação (até 15 letras) </small>
             </Form.Group>
             <Button className="w-100" type="submit">
-              CRIAR CONTA
+              ATUALIZAR CONTA
             </Button>
           </Form>
 </Card.Footer>
-      <div className="w-100 text-center mt-2">
+      <div className=" text-center ">
+      <div className="text-center">
+        <Link to="/">Cancelar</Link>
+      </div>
         <Button variant="link" onClick={handleLogout}>
           SAIR
         </Button>

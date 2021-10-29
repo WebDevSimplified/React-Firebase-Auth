@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom"
 
 import firebase from "firebase"
 
-import logo from '../image/logo.svg'
+import logo from '../image/logo.png'
 import googleIconImg from '../image/google-icon.svg';
 
 export default function Login() {
@@ -30,6 +30,7 @@ export default function Login() {
     
 
     setLoading(false)
+    history.push("/Profile")
   } 
 
 //login google incio
@@ -49,16 +50,21 @@ export default function Login() {
     setError("Algo deu errado, tente novamente")
     
   }
-  history.push("/Creatkey")
+  history.push("/Profile")
 }
 // login google final 
   return (
     <>
-      <Card className="shadow p-3 mb-5 bg-secondary text-white rounded p-3 mb-2">
+      <Card className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <Card.Body>
-        <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
-          <h2 className="text-center mb-4 mt-4">ENTRAR NA CONTA</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
+        <img src={logo}alt="Gera pix" className="card-img-top mx-auto d-block mb-4" />
+        <p className="text-center"> Faça seu login e cria sua conta PIX. 
+        Simples rápido e fácil. Caso não tenha conta basta 
+        <Link className="btn btn-link" to="/signup">clicar aqui</Link>e crirar uma.
+        </p>
+        
+          <p className="text-center mb-4 mt-4">ENTRAR NA CONTA</p>
+          {error && <Alert variant="danger">{error}</Alert>} 
           <button onClick={handLoginGoogle}  className="w-100 mt-4 mb-4 btn-lg btn btn-danger" >
             <img className="pr-4" src={googleIconImg} alt="Logo do Google" />
              Logar com Google
