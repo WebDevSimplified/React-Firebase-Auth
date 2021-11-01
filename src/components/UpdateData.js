@@ -12,18 +12,21 @@ import logo from '../image/logo.png'
 export default function UpData() {
   
   const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
+  const {currentUser, logout } = useAuth()
   const history = useHistory()
+  const [loading, setLoading] = useState(false)
 
   async function handleLogout() {
     setError("")
 
     try {
       await logout()
-      history.push("/")
+      setLoading(false)
+      history.push("/Login")
     } catch {
       setError("Falha para fazer logout")
     }
+    
   }
   // redirecionar sem login l
 
@@ -36,7 +39,7 @@ export default function UpData() {
   
   
 
-async function handCreatClient(event){
+async function handUpdateClient(event){
   event.preventDefault()
 
   if (newChave.trim()===''){
@@ -50,7 +53,7 @@ async function handCreatClient(event){
   }
   
   
-
+ 
    const clientRef = firebase.database().ref('clients').child(currentUser?.uid);
 
    const firebaseClient = await clientRef.set({
@@ -59,14 +62,14 @@ async function handCreatClient(event){
     city: newCity,
     chave: newChave,
   })
-  history.push("/profile")
+  history.push("/Profile")
 
 }
 // fim do Atualizar database
 
   return (
     <>
-      <Card className="text-light shadow bg-dark text-white rounded p-3">
+      <Card className="text-light shadow bg-secondary rounded p-3">
       <div className="w-100 text-right">
       <Button className="mr-03 badge badge-secondary" variant="link" onClick={handleLogout}>
           SAIR
@@ -84,7 +87,7 @@ async function handCreatClient(event){
       <Card.Footer className="shadow mt-2 p-3 bg-dark text-white rounded">
         <h4 className="text-center border border-alert d-block mb-4">ATUALIZE SEU DADOS PIX</h4>
         <p className="text-center"> verifique se seus dados já estão cadastrados no seu banco para gerar o PIX</p>
-      <Form onSubmit={handCreatClient}>
+      <Form onSubmit={handUpdateClient}>
             <Form.Group className="mb-4"id="chave">
               <Form.Label className="mb-0">Chave PIX</Form.Label>
               <Form.Control className="form-control-sm" type="text" name="newChave"required placeholder="Digite sua chave PIX" 
@@ -106,7 +109,7 @@ async function handCreatClient(event){
               />
               <small  className="mt-0 form-text text-muted">Cidade do beneficiário ou da transação (até 15 letras) </small>
             </Form.Group>
-            <Button className="w-100" type="submit">
+            <Button disabled={loading} className="w-100" type="submit">
               Atualizar Chave
             </Button>
           </Form>
