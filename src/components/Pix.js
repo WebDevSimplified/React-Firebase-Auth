@@ -1,6 +1,4 @@
-
-
-module.exports = class Pix {
+module.exports  = class Pix {
   constructor(pixKey, description, merchantName, merchantCity, txid, amount) {
     this.pixKey = pixKey;
     this.description = description;
@@ -107,3 +105,6 @@ module.exports = class Pix {
     return this.ID_CRC16 + "04" + dechex(resultado).toUpperCase();
   }
 };
+
+
+
