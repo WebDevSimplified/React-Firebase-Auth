@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 
 import "firebase/database";
 import firebase from 'firebase';
-
+// import Pix from "./Pix";
 
 import logo from '../image/logo.png';
 
@@ -83,7 +83,7 @@ export default function Profile() {
     name,
     city,
     "TXID",
-    5.50
+    5.50 // valor.toFixed(2).replace(',', '.')
   );
 
 
@@ -135,7 +135,7 @@ export default function Profile() {
         <div className="user-info">
           <h4 className="text-center mb-4 mp-4">SUA CONTA PIX</h4>
           <p className=" mb-0"> NOME:</p>
-          <p className="text-decoration-underline font-italic border-bottom "> {name}}</p>
+          <p className="text-decoration-underline font-italic border-bottom "> {name}</p>
           <p className=" mb-0"> CIDADE:</p>
           <p className="text-decoration-underline font-italic border-bottom "> {city}</p>
           <p className="mb-0"> CHAVE PIX:</p>

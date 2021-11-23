@@ -27,7 +27,7 @@ export default function Profile() {
 async function verificaChave() {
     
   const verClient = await clientsRef.child("clients/").child(user?.uid).get()
-  console.log(clientsRef);
+ 
 
   if (!verClient.exists()) {
     return history.push("/Creatkey");
