@@ -9,9 +9,8 @@ import Pix from "./Pix";
 
 import logo from '../image/logo.png';
 
-// const Pix = require("./Pix");
+const Pix = require("./Pix");
 const QRCode = require('qrcode.react');
-
 
 
 
