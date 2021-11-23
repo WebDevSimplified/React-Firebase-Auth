@@ -6,28 +6,23 @@ import { Link, useHistory } from "react-router-dom";
 import "firebase/database";
 import firebase from 'firebase';
 
-
 import logo from '../image/logo.png';
 
-const Pix = require("./Pix");
-const QRCode = require('qrcode.react');
 
 
-
-
-export default function Profile() {
+export default function QRCode() {
 
   const [error, setError] = useState('');
   const [chave, setChave] = useState('');
   const [city, setCity] = useState('');
   const [name, setName] = useState('');
 
-
-  const { logout } = useAuth();
+  const {logout} = useAuth();
   const history = useHistory();
 
 
   const user = firebase.auth().currentUser;
+
   const clientsRef = firebase.database().ref();
 
 
@@ -46,6 +41,8 @@ export default function Profile() {
 
   }
   //Logout fim 
+
+
   // Recuperara dados do realtime database 
 
   async function GetData() {
@@ -56,47 +53,36 @@ export default function Profile() {
         dataClient.push(id, data);
 
 
-        const dado = dataClient.map(dados =>
-          data.name,
-          data.authorId,
-          data.city,
-          data.chave
-
-        )
       };
+      const dado = dataClient.map(dados =>
+        data.name,
+        data.authorId,
+        data.city,
+        data.chave
+
+      );
       setChave(data.chave);
       setName(data.name);
       setCity(data.city);
+
+
+
+
     });
   }
+  
 
-
-  GetData();
+GetData();
 
   // fim de recuperar data
-
-  // gerar pix  
-
-  const pix = new Pix(
-    chave,
-    "DESCRICAO_PAGAMENTO",
-    name,
-    city,
-    "TXID",
-    5.50
-  );
-
-
-
-  const  payload =  pix.getPayload();
-
-  // fim do gerar pix
-
-
+  
 
 
   return (
     <>
+    
+  
+
       <Card className="text-light shadow  bg-secondary rounded mb-2">
         <div className="w-100 text-right">
           <Button className="mr-03 badge badge-secondary" variant="link" onClick={handleLogout}>
@@ -105,23 +91,14 @@ export default function Profile() {
         </div>
         <Card.Body>
 
-          <img src={logo} alt="Gera pix" className="card-img-top mx-auto mb-4" />
-          <h4 className="text-center mb-4">LER QRCode</h4>
+          <img src={logo} alt="Gera pix" className="card-img-top mx-auto d-block mb-4" />
+          <h4 className="text-center mb-4 text-black">SUA CONTA</h4>
           {error && <Alert variant="danger">{error}</Alert>}
+          <p>Os dados que aparecem aqui são os dados que você cadastrou no seu perfil.
+          </p>
 
-          <div className="text-center">
 
 
-            <QRCode
-              value={payload}
-              size={300}
-              level={"H"}
-            />
-          
-          <Button className="mr-03" onClick={() => navigator.clipboard.writeText(payload)}>
-            Copie o QRCode
-          </Button>
-</div>
 
         </Card.Body>
       </Card>
@@ -135,7 +112,7 @@ export default function Profile() {
         <div className="user-info">
           <h4 className="text-center mb-4 mp-4">SUA CONTA PIX</h4>
           <p className=" mb-0"> NOME:</p>
-          <p className="text-decoration-underline font-italic border-bottom "> {name}}</p>
+          <p className="text-decoration-underline font-italic border-bottom "> {name}</p>
           <p className=" mb-0"> CIDADE:</p>
           <p className="text-decoration-underline font-italic border-bottom "> {city}</p>
           <p className="mb-0"> CHAVE PIX:</p>

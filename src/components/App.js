@@ -10,6 +10,8 @@ import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
 import Profile from "./Profile"
+import GerarPix from "./GerarPix"
+import QRCode from "./PixQRCode"
 
 
 
@@ -31,6 +33,8 @@ function App() {
               <Route path="/Creatkey" component={Dashboard} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/UpData" component={UpData} />
+              <Route path="/GerarPix" component={GerarPix} />
+              <Route path="/PixQRCode" component={QRCode} />
             </Switch>
           </AuthProvider>
         </Router>

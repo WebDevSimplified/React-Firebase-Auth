@@ -16,11 +16,29 @@ export default function Profile() {
   const [city, setCity] = useState('');
   const [name, setName] = useState('');
 
-  const { logout } = useAuth()
+  const { logout } = useAuth();
   const history = useHistory();
 
 
   const user = firebase.auth().currentUser;
+
+  const clientsRef = firebase.database().ref();
+// verficar se o usuario esta logado e se ele tem uma chave
+async function verificaChave() {
+    
+  const verClient = await clientsRef.child("clients/").child(user?.uid).get()
+  console.log(clientsRef);
+
+  if (!verClient.exists()) {
+    return history.push("/Creatkey");
+  } else {
+    return history.push("/GerarPix");
+  }
+
+}
+verificaChave();
+// fim do codigo
+
 
   //logout incio 
 
@@ -40,31 +58,37 @@ export default function Profile() {
 
   // Recuperara dados do realtime database 
 
-  const clientsRef = firebase.database().ref();
   async function GetData() {
     await clientsRef.child("clients/").child(user?.uid).get().then((snapshot) => {
       const dataClient = [];
       const data = snapshot.val();
       for (let id in data) {
         dataClient.push(id, data);
+
+
       };
       const dado = dataClient.map(dados =>
         data.name,
         data.authorId,
         data.city,
         data.chave
-      )
+
+      );
       setChave(data.chave);
       setName(data.name);
       setCity(data.city);
 
 
+
+
     });
   }
+  
 
-  GetData()
+GetData();
+
   // fim de recuperar data
-
+  
 
 
   return (
