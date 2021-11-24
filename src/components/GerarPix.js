@@ -18,22 +18,24 @@ export default function GerarPix() {
 
   //logout incio 
 
-async function handleLogout() {
-  setError("Algo deu errado")
+  async function handleLogout() {
+    setError("Algo deu errado")
 
-  try {
-    await logout()
-    history.push("/Login")
-  } catch {
-    setError("Failed to log out")
+    try {
+      await logout()
+      history.push("/Login")
+    } catch {
+      setError("Failed to log out")
+    }
+
   }
-
-}
-//Logout fim 
+  //Logout fim 
   const [error, setError] = useState('');
   const [chave, setChave] = useState('');
   const [city, setCity] = useState('');
   const [name, setName] = useState('');
+  const txtId = "";
+
 
 
   const { logout } = useAuth();
@@ -44,7 +46,7 @@ async function handleLogout() {
   const clientsRef = firebase.database().ref();
 
 
-  
+
   // Recuperara dados do realtime database 
 
   async function handleCreat() {
@@ -73,19 +75,19 @@ async function handleLogout() {
   // gerar pix  QR-Code
   const pix = new Pix(
     chave,
-    "mensagem do pagamento",
+    name,
     name,
     city,
-    "TXID",
+    txtId,
     55.50 // valor.toFixed(2).replace(',', '.')
   );
 
 
-  const  payload =  pix.getPayload();
+  const payload = pix.getPayload();
 
   // fim do gerar pix
 
-  handleCreat()
+  // handleCreat()
 
 
   return (
@@ -95,40 +97,39 @@ async function handleLogout() {
           <Button className="mr-03 badge badge-secondary" variant="link" onClick={handleLogout}>
             SAIR
           </Button>
-        </div>
-        <Card.Body>
 
-          <img src={logo} alt="Gera pix" className="card-img-top mx-auto mb-4" />
+        </div>
+
+        {name.length > 0 && <Card.Body>
+          <img src={logo} alt="Gera pix" className="img-fluid "/>
+
           <h4 className="text-center mb-4">LER QRCode</h4>
-          
+
           {error && <Alert variant="danger">{error}</Alert>}
 
           <div className="text-center">
-          <p>{name}</p>
+            <p><span> {name}</span></p>
 
-            <QRCode
-              value={payload}
-              size={300}
-              level={"H"}
-            />
-          
-          <Button className="mr-03" onClick={() => navigator.clipboard.writeText(payload)}>
-            Copie o QRCode
-          </Button>
-</div>
+            <QRCode value={payload} size={300} level={"H"} />
 
-        </Card.Body>
+            <Button className="mr-03" onClick={() => navigator.clipboard.writeText(payload)}>
+              Copie o QRCode
+            </Button>
+          </div>
+
+        </Card.Body>}
+
       </Card>
 
       <Card.Footer className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
-        
+
         <div className="user-info text-center mb-4">
-        <Form onSubmit="#">
-            <Form.Group className="mb-4 mt-4"id="chave">
-              <Form.Label className="mb-0">Chave PIX</Form.Label>
-              <Form.Control type="number" name="Valor"required placeholder="R$ 0.00" 
+          <Form>
+            <Form.Group className="mb-4 mt-4" id="chave">
+              <Form.Label className="mb-0">Valor da conta</Form.Label>
+              <Form.Control type="number" name="Valor" required placeholder="R$ 0.00"
               />
-              <small  className="form-text text-muted">R$ 0.00 Digite o valor do PIX </small>
+              <small className="form-text text-muted">R$ 0.00 Digite o valor do PIX </small>
             </Form.Group>
             <Button className="w-100" type="submit">
               CRIAR QR-CODE

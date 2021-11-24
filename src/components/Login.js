@@ -87,7 +87,7 @@ export default function Login() {
           </div>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
+      <div className="w-100 text-center ">
         Crie uma conta! <Link className="btn btn-link" to="/signup">Criar conta</Link>
       </div>
     </>
