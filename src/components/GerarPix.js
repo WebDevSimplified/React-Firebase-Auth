@@ -5,11 +5,11 @@ import { Link, useHistory } from "react-router-dom";
 
 import "firebase/database";
 import firebase from 'firebase';
-// import Pix from "./Pix";
+import Pix from "./Pix";
 
 import logo from '../image/logo.png';
 
-const Pix = require("./Pix");
+// const Pix = require("./Pix");
 const QRCode = require('qrcode.react');
 
 
@@ -87,7 +87,7 @@ export default function GerarPix() {
 
   // fim do gerar pix
 
-  // handleCreat()
+  handleCreat()
 
 
   return (
