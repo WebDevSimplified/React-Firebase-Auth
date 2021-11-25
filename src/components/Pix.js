@@ -1,4 +1,4 @@
-export default class pix{
+export default class Pix{
   constructor(pixKey, description, merchantName, merchantCity, txid, amount) {
     this.pixKey = pixKey;
     this.description = description;
