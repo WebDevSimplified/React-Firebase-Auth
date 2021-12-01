@@ -16,9 +16,6 @@ export default function Dashboard() {
   const history = useHistory()
 
 
-  
-  
-  
 
   async function handleLogout() {
     setError("")
@@ -54,36 +51,49 @@ async function handCreatClient(event){
     return
   }
   
-  
-
-  const clientRef = firebase.database().ref('clients').child(currentUser?.uid);
-
-  const firebaseClient = await clientRef.set({
+  const firebaseClient = {
     name: newName,
     authorId: currentUser?.uid,
     city: newCity,
     chave: newChave,
-  })
-  history.push("/profile")
+  };
+
+  // await firebase.database().ref(`clients/${currentUser?.uid}`).push(firebaseClient);
+  await firebase.database().ref('clients/').child(currentUser?.uid).push(firebaseClient);
+
+  
+  history.push("/GerarValor")
 
 }
 // fim do criar database
 
   return (
     <>
-      <Card className="text-light shadow bg-dark text-white p-3 mb-5 rounded p-3 mb-2">
+      <Card className="text-white  shadow  bg-secondary rounded mb-2">
+      <div className="text-right">
+          <Button className="badge badge-secondary" variant="link" onClick={handleLogout}>
+            SAIR
+          </Button>
+
+        </div>
+        
         <Card.Body>
-        <img src={logo}alt="Gera pix" className="card-img-top mx-auto d-block mb-4" />
-          <h2 className="text-center mb-4 font-weight-bold text-black">CONTA</h2>
+          <div>
+            <img src={logo}alt="Gera pix"  className="card-img-top" /> 
+          </div>
+        
+          <h6 className="text-center font-weight-bold ">CONTA</h6>
           {error && <Alert variant="danger">{error}</Alert>}
-          <div className="user-info text-center mb-4 ">
+          <div className="user-info text-center ">
                 <img className="rounded-circle text-center" src={currentUser.photoURL} alt={currentUser.displayName} />
                 <p className="font-weight-bold mb-4">{currentUser.displayName}</p>
+              <Link to="/update-profile" className="btn btn-primary btn-sm mt-8">
+            Atualizar senha
+          </Link>
+          
               </div>
           
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
-            Atualizar dados
-          </Link>
+          
         </Card.Body>
       </Card>
       <Card.Footer className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
@@ -116,11 +126,7 @@ async function handCreatClient(event){
             </Button>
           </Form>
 </Card.Footer>
-      <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>
-          SAIR
-        </Button>
-      </div>
+      
     </>
   )
 }

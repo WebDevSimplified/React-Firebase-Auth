@@ -67,7 +67,7 @@ export default function Login() {
           {error && <Alert variant="danger">{error}</Alert>} 
           <button onClick={handLoginGoogle}  className="w-100 mt-4 mb-4 btn-lg btn btn-danger" >
             <img className="pr-4" src={googleIconImg} alt="Logo do Google" />
-             Logar com Google
+             Use o Google
           </button>
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">

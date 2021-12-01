@@ -55,7 +55,7 @@ export default function UpdateProfile() {
 
   return (
     <>
-      <Card className="text-light shadow bg-secondary rounded p-3">
+      <Card className="text-light shadow bg-dark rounded p-3">
         <div className="w-100 text-right">
           <Button className="mr-03 badge badge-secondary" variant="link" onClick={handleLogout}>
             SAIR
@@ -99,10 +99,12 @@ export default function UpdateProfile() {
             </Button>
           </Form>
         </Card.Body>
+        <div className="pl-3 pr-3 row justify-content-between">
+          <Link to="/UpData" > Atualizar Chave PIX </Link>
+          <Link to="/">Cancelar</Link>
+        </div>
       </Card>
-      <div className="w-100 text-center mt-2">
-        <Link to="/">Cancelar</Link>
-      </div>
+      
     </>
   )
 }
