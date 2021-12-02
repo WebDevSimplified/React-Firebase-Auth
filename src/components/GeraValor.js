@@ -56,7 +56,7 @@ export default function GerarValor() {
       menseger: newMenseger,
       date: new Date().toLocaleString().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
     };
-    await firebase.database().ref(`clients/${currentUser?.uid}/PixCreated`).push(firebaseClient);
+    await firebase.database().ref(`clients/${currentUser?.uid}/PixCreated/`).push(firebaseClient);
     history.push("/QRCode")
   };
 

@@ -8,7 +8,7 @@ import 'firebase/database'
 
 
 import logo from '../image/logo.png'
-import { displayName } from "qrcode.react"
+
 
 export default function UpData() {
 
@@ -31,7 +31,7 @@ export default function UpData() {
   }
   // redirecionar sem login l
 
-
+  const user = firebase.auth().currentUser;
   //Atualizar  database realtime 
 
   const [newChave, setNewChave] = useState('')
@@ -55,16 +55,16 @@ export default function UpData() {
 
 
 
-    const clientRef = firebase.database().ref('clients').child(currentUser?.uid);
+    const clientRef = firebase.database().ref(`clients/${user?.uid}/key`);
 
-    const firebaseClient = await clientRef.set({
+    const firebaseClient = await clientRef.push({
       name: newName,
       authorId: currentUser?.uid,
       city: newCity,
       chave: newChave,
     })
     history.push("/Profile")
-
+console.log(newName)
   }
   // fim do Atualizar database
 
@@ -92,7 +92,7 @@ export default function UpData() {
         <Form onSubmit={handUpdateClient}>
           <Form.Group className="mb-4" id="chave">
             <Form.Label className="mb-0">Chave PIX</Form.Label>
-            <Form.Control className="form-control-sm" type="text" name="newChave" required placeholder="Digite sua chave PIX"
+            <Form.Control className="form-control-sm" type="text" name="newChave" required placeholder="chave"
               onChange={(event) => setNewChave(event.target.value)}
             />
             <small className="form-text text-muted">Chave PIX já cadastrada na instituição financeira (Telefone, E-mail, CPF, CNPJ ou chave Aleatória) </small>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState } from "react";
 import { Card, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
@@ -37,29 +37,34 @@ export default function Profile() {
     }
   }
   //Logout fim 
+  
   // Recuperara dados do realtime database 
-  const clientsRef = firebase.database().ref();
+  const chaveRef = firebase.database().ref();
 
   async function GetData() {
-    const clientList = await clientsRef.child(`clients/${user.uid}`).get();
-    const dataClient = [];
-    const data = clientList.val();
-    for (let id in data) {
-      dataClient.push(id, data);
+    const chaveRes = await chaveRef.child(`clients/${user.uid}/key/`).get(user?.uid);
+    const dataChave = [];
+    const dataRes = chaveRes.val();
+    for (let id in dataRes) {
+      dataChave.push(id, dataRes);
     };
-    const resChave = Object.entries(clientList.val() ?? {}).map(([key, value]) => {
-      return {  
-        'name': value.name,
-        'chave': value.chave,
-        'city': value.city
-      }  
-    }
-    );console.log(resChave);
-    setChave(resChave[0].chave);
-    setName(resChave[0].name);
-    setCity(resChave[0].city);
-  };
 
+    const resChave = Object.entries(chaveRes.val() ?? {}).map(([key, value]) => {
+      return {
+        'chave': value.chave,
+        'city': value.city,
+        'name': value.name
+
+      }
+    }
+    );
+    setChave(resChave[0].chave);
+    setCity(resChave[0].city);
+    setName(resChave[0].name);
+    console.log(resChave[0].chave);
+    
+  };
+  
  GetData();
     // fim de recuperar data
     return (
