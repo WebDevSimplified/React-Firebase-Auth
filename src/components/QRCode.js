@@ -140,7 +140,7 @@ export default function GenerationQRCode() {
       <Card.Footer className="shadow text-center p-3 bg-dark text-white rounded">
       <h4 className="text-center mb-4">LER QRCode</h4>
 
-        <QRCode value={payload} size={280} level={"H"} />
+        <QRCode value={payload} size={280} />
 
         <Button className="mr-03" onClick={() => navigator.clipboard.writeText(payload)}>
           Copie o QRCode
