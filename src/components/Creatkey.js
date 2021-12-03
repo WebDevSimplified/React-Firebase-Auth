@@ -29,7 +29,7 @@ export default function Dashboard() {
   }
   // redirecionar sem login l
 
-
+  const user = firebase.auth().currentUser;
   //criar database realtime 
   
   const [newChave, setNewChave] = useState('')
@@ -59,7 +59,7 @@ async function handCreatClient(event){
   };
 
   // await firebase.database().ref(`clients/${currentUser?.uid}`).push(firebaseClient);
-  await firebase.database().ref('clients/').child(currentUser?.uid).push(firebaseClient);
+  await firebase.database().ref(`clients/${user?.uid}/key`).push(firebaseClient);
 
   
   history.push("/GerarValor")

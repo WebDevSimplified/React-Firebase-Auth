@@ -34,20 +34,20 @@ export default function GerarValor() {
 
 
   //Criar pix realtime 
-
+  const user = firebase.auth().currentUser;
 
   async function handCreatPix(event) {
     event.preventDefault()
 
-    // if (newPix.trim() === '') {
-    //   return
-    // }
-    // if (newTextId.trim() === '') {
-    //   return
-    // }
-    // if (newMenseger.trim() === '') {
-    //   return
-    // }
+    if (newPix.trim() === '') {
+      return
+    }
+    if (newTextId.trim() === '') {
+      return
+    }
+    if (newMenseger.trim() === '') {
+      return
+    }
 
     const firebaseClient = {
       valorPix: newPix,
@@ -56,7 +56,7 @@ export default function GerarValor() {
       menseger: newMenseger,
       date: new Date().toLocaleString().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
     };
-    await firebase.database().ref(`clients/${currentUser?.uid}/PixCreated/`).push(firebaseClient);
+    await firebase.database().ref(`clients/${user?.uid}/PixCreated/`).push(firebaseClient);
     history.push("/QRCode")
   };
 
