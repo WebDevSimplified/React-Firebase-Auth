@@ -11,27 +11,13 @@ import logo from '../image/logo.png';
 import { childContextTypes } from "qrcode.react";
 import Pix from "./Pix";
 
-// const Pix = require("./Pix");
+
 const QRCode = require('qrcode.react');
 
 
 
 export default function GenerationQRCode() {
 
-  //logout incio 
-
-  async function handleLogout() {
-    setError("Algo deu errado")
-
-    try {
-      await logout()
-      history.push("/Login")
-    } catch {
-      setError("Failed to log out")
-    }
-
-  }
-  //Logout fim 
   const [error, setError] = useState('');
   const [chave, setChave] = useState('');
   const [city, setCity] = useState('');
@@ -52,7 +38,7 @@ export default function GenerationQRCode() {
   const chaveRef = firebase.database().ref();
   async function GetData() {
 
-    const clientList =  await clientsRef.child(`clients/${user.uid}/PixCreated/`).get();
+    const clientList = await clientsRef.child(`clients/${user.uid}/PixCreated/`).get();
     const dataClient = [];
     const data = clientList.val();
     for (let id in data) {
@@ -65,23 +51,21 @@ export default function GenerationQRCode() {
         'textId': value.textId,
         'valorPix': value.valorPix
 
-      }}
+      }
+    }
     );
     setMenseger(resPix[0].menseger);
     setTextId(resPix[0].textId);
     setValorPix(resPix[0].valorPix);
 
-console.log(menseger);
     // get chave do cliente
-    const chaveRes =  await chaveRef.child(`clients/${user.uid}/key/`).get();
-    
-    // console.log(chaveRes.val());
+    const chaveRes = await chaveRef.child(`clients/${user.uid}/key/`).get();
+
     const dataChave = [];
     const dataRes = chaveRes.val();
     for (let id in dataRes) {
       dataChave.push(id, dataRes);
     };
-    
 
     const resChave = Object.entries((chaveRes.val()) ?? {}).map(([key, value]) => {
       return {
@@ -94,7 +78,8 @@ console.log(menseger);
     setChave(resChave[0].chave);
     setCity(resChave[0].city);
     setName(resChave[0].name);
-    console.log(name);
+
+
   };
 
   GetData();
@@ -110,8 +95,22 @@ console.log(menseger);
     textId,
     valorPix
   );
-console.log(pix);
+
   const payload = pix.getPayload();
+  //logout incio 
+
+  async function handleLogout() {
+    setError("Algo deu errado")
+
+    try {
+      await logout()
+      history.push("/Login")
+    } catch {
+      setError("Failed to log out")
+    }
+
+  }
+  //Logout fim 
 
   return (
     <>
@@ -125,38 +124,28 @@ console.log(pix);
 
         <Card.Body>
           <img src={logo} alt="Gera pix" className="img-fluid " />
-
-          <h4 className="text-center mb-4">LER QRCode</h4>
-
+          
           {error && <Alert variant="danger">{error}</Alert>}
-
-          <div className="text-center">
-            <p><span>{menseger}</span></p>
-            <p><span>{ chave}</span></p>
-
-            <QRCode value={payload} size={300} level={"H"} />
-
-            <Button className="mr-03" onClick={() => navigator.clipboard.writeText(payload)}>
-              Copie o QRCode
-            </Button>
-          </div>
-
-        </Card.Body>
-
-      </Card>
-
-      <Card.Footer className="shadow p-3 bg-dark text-white rounded">
-
-        <div className="user-info text-center ">
-
-        </div>
-        <div className="pl-3 pr-3 row justify-content-between">
+          <div className="pl-3 pr-3 row justify-content-between">
           <Link className="btn btn-primary btn-sm" to="/UpData">Atualizar chave</Link>
 
           <Link to="/QRCode" className="btn btn-primary btn-sm">
             Novo QRCode
           </Link>
         </div>
+        </Card.Body>
+
+      </Card>
+
+      <Card.Footer className="shadow text-center p-3 bg-dark text-white rounded">
+      <h4 className="text-center mb-4">LER QRCode</h4>
+
+        <QRCode value={payload} size={280} level={"H"} />
+
+        <Button className="mr-03" onClick={() => navigator.clipboard.writeText(payload)}>
+          Copie o QRCode
+        </Button>
+        
 
       </Card.Footer>
 
