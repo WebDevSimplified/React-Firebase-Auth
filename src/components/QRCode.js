@@ -89,10 +89,10 @@ export default function GenerationQRCode() {
   // gerar qrcode Payload
   const pix = new Pix(
     chave,
-    menseger,
-    name,
-    city,
-    textId,
+    menseger.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+    name.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+    city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+    textId.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     valorPix
   );
 
@@ -115,35 +115,33 @@ export default function GenerationQRCode() {
   return (
     <>
       <Card className="text-light shadow  bg-secondary rounded mb-2">
-        <div className="w-100 text-right">
-          <Button className="mr-03 badge badge-secondary" variant="link" onClick={handleLogout}>
+        
+          <div className="pl-3 pr-3 row justify-content-between">
+          <Link className="badge badge-secondary" to="/UpData">EDITAR CHAVE</Link>
+          <Link to="/GerarValor" className="badge badge-secondary" >
+            CRIAR NOVO PIX
+          </Link>
+          <Button className="badge badge-secondary" variant="link" onClick={handleLogout}>
             SAIR
           </Button>
-
         </div>
+       
 
         <Card.Body>
           <img src={logo} alt="Gera pix" className="img-fluid " />
-          
-          {error && <Alert variant="danger">{error}</Alert>}
-          <div className="pl-3 pr-3 row justify-content-between">
-          <Link className="btn btn-primary btn-sm" to="/UpData">Atualizar chave</Link>
 
-          <Link to="/QRCode" className="btn btn-primary btn-sm">
-            Novo QRCode
-          </Link>
-        </div>
+          {error && <Alert variant="danger">{error}</Alert>}
+         
         </Card.Body>
 
       </Card>
 
-      <Card.Footer className="shadow text-center p-3 bg-dark text-white rounded">
+      <Card.Footer className="shadow text-center bg-dark text-white rounded">
       <h4 className="text-center mb-4">LER QRCode</h4>
 
-        <QRCode value={payload} size={280} />
-
-        <Button className="mr-03" onClick={() => navigator.clipboard.writeText(payload)}>
-          Copie o QRCode
+        <QRCode value={payload} size={280} className="mb-4 mr-3" />
+        <Button className="mr-03 mt-4 " onClick={() => navigator.clipboard.writeText(payload)}>
+           COPIE E ENVIE O CÓDIGO 
         </Button>
         
 

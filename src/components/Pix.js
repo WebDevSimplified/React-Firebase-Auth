@@ -7,8 +7,10 @@ export default class Pix{
     this.merchantName = merchantName;
     this.merchantCity = merchantCity;
     this.txid = txid;
-    // this.amount = amount.toFixed(2);
     this.amount = amount;
+    // this.amount = amount.toFixed(2);
+
+
 
     this.ID_PAYLOAD_FORMAT_INDICATOR = "00";
     this.ID_MERCHANT_ACCOUNT_INFORMATION = "26";

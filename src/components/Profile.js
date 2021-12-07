@@ -51,18 +51,18 @@ export default function Profile() {
     };
     // ver dados do realtime database redirecionar para a pagina de valor
 
-  if (chaveRes.val() === null) {
-    history.push("/Creatkey")
-  } else {
-    history.push("/GerarValor")
-  }
+  // if (chaveRes.val() === null) {
+  //   history.push("/Creatkey")
+  // } else {
+  //   history.push("/GerarValor")
+  // }
     // Fim do codigo redirecionamento
 
     const resChave = Object.entries(chaveRes.val() ?? {}).map(([key, value]) => {
       return {
         'chave': value.chave,
-        'city': value.city,
-        'name': value.name
+        'city': value.city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+        'name': value.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
         
       }
   
@@ -71,14 +71,21 @@ export default function Profile() {
     
     );
     setChave(resChave[0].chave);
-    setCity(resChave[0].city);
+    setCity(resChave[0].city); 
     setName(resChave[0].name);
    
 
   };
   GetData();
   // fim de recuperar data
+
+  function removerAcentos(s) {
+    return s.normalize('NFD');
+  }
   
+  console.log(removerAcentos(name).replace(/[\u0300-\u036f]/g, ''));
+
+ 
   return (
     <>
       <Card className="text-light shadow  bg-secondary rounded mb-2">
