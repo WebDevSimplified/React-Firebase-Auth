@@ -51,11 +51,11 @@ export default function Profile() {
     };
     // ver dados do realtime database redirecionar para a pagina de valor
 
-  // if (chaveRes.val() === null) {
-  //   history.push("/Creatkey")
-  // } else {
-  //   history.push("/GerarValor")
-  // }
+  if (chaveRes.val() === null) {
+    history.push("/Creatkey")
+  } else {
+    history.push("/GerarValor")
+  }
     // Fim do codigo redirecionamento
 
     const resChave = Object.entries(chaveRes.val() ?? {}).map(([key, value]) => {
