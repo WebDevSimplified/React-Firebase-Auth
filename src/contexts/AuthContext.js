@@ -1,5 +1,8 @@
 import React, { useContext, useState, useEffect } from "react"
-import { auth } from "../firebase"
+import {auth, firebase} from "../firebase"
+
+
+
 
 const AuthContext = React.createContext()
 
@@ -11,6 +14,11 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
+  
+
+
+  
+
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
   }
@@ -18,7 +26,7 @@ export function AuthProvider({ children }) {
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password)
   }
-
+ 
   function logout() {
     return auth.signOut()
   }
@@ -34,6 +42,7 @@ export function AuthProvider({ children }) {
   function updatePassword(password) {
     return currentUser.updatePassword(password)
   }
+
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -51,9 +60,28 @@ export function AuthProvider({ children }) {
     logout,
     resetPassword,
     updateEmail,
-    updatePassword
+    updatePassword,
+    signInWithGoogle
   }
+  async function signInWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
 
+    const result = await auth.signInWithPopup(provider);
+
+    if (result.user) {
+      const { displayName, photoURL, uid } = result.user
+
+      if (!displayName || !photoURL) {
+        throw new Error('Missing information from Google Account.');
+      }
+
+      setCurrentUser({
+        id: uid,
+        name: displayName,
+        avatar: photoURL
+      })
+    }
+  }
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
