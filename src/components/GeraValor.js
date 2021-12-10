@@ -1,7 +1,10 @@
 import React, { useState } from "react"
-import { Form, Card, Button, Alert} from "react-bootstrap"
+import { Form, Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+
+import CurrencyInput from 'react-currency-masked-input'
+
 
 
 import firebase from 'firebase'
@@ -29,17 +32,16 @@ export default function GerarValor() {
     } catch {
       setError("Falha para fazer logout")
     }
-
   }
-  // redirecionar sem login l
-
-
+  // Macara de valor monetário
+  
+  
   //Criar pix realtime 
   const user = firebase.auth().currentUser;
 
   async function handCreatPix(event) {
     event.preventDefault()
-
+  
     if (newPix.trim() === '') {
       return
     }
@@ -60,7 +62,7 @@ export default function GerarValor() {
     await firebase.database().ref(`clients/${user?.uid}/PixCreated/`).push(firebaseClient);
     history.push("/QRCode")
   };
-
+  console.log(newPix)
   // fim do criar pix database
   return (
     <>
@@ -81,18 +83,29 @@ export default function GerarValor() {
         <div className="user-info text-center mb-4">
           <Form>
             <Form.Group className="mb-4 mt-4" id="chave">
-              <Form.Label className="mb-0">Valor da conta</Form.Label>
-              <Form.Control className="form-control" name="newPix" required placeholder="R$ 0.00"
+              <Form.Label className="mb-0">Valor do PIX</Form.Label>
+              <CurrencyInput className="form-control"
+                name="newPix"
+                required
+                pattern="\d*"
+                type="number"
+
+                // placeholder=""
                 onChange={(event) => setPix(event.target.value)} />
+              {/* <Form.Control className="form-control" 
+              name="newPix" 
+              required placeholder="R$ 0.00"
+              onChange={(event) => setPix(event.target.value)} /> */}
+
               <small className="form-text text-muted">R$ 0.00 Digite o valor do PIX </small>
             </Form.Group>
             <Form.Control type="text" name="newTextId" required placeholder="Digite um Identificador da venda"
               onChange={(event) => setTextId(event.target.value)} />
-            <small className="form-text text-right text-muted">Digite mensagem para o cliente </small>
+            <small className="form-text text-left text-muted">Digite mensagem para o cliente* </small>
             <Form.Control type="text" name="newMenseger" required placeholder="Mensagem para o cliente"
               onChange={(event) => setMenseger(event.target.value)} />
-            <small className="form-text text-right text-muted">Digite um identificador da venda </small>
-            <Button onClick={handCreatPix} className="w-100 mb-4 " type="submit">
+            <small className="form-text text-left text-muted">Digite um identificador da vendaˆ </small>
+            <Button onClick={handCreatPix} className="w-100 mb-4 mt-4" type="submit">
               CRIAR QR-CODE
             </Button>
           </Form>
