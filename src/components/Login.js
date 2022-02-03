@@ -1,29 +1,36 @@
-import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import React, { useRef, useState } from "react";
+import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
 
 export default function Login() {
-  const emailRef = useRef()
-  const passwordRef = useRef()
-  const { login } = useAuth()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const history = useHistory()
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e) {
-    e.preventDefault()
-
-    try {
-      setError("")
-      setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
-    } catch {
-      setError("Failed to log in")
-    }
-
-    setLoading(false)
+  function handleSubmit(e) {
+    e.preventDefault();
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      }),
+    };
+    fetch("https://reqres.in/api/login", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Success:", result);
+        if (result?.error === "user not found") {
+          setError(
+            "Login failed. Remember to enter [eve.holt@reqres.in] for the USERNAME and [cityslicka] for the PASSWORD to see a Successful Login in this demo."
+          );
+        }
+      })
+      .catch(() => {
+        setError("Login failed. Check your Username and Password");
+      });
   }
 
   return (
@@ -45,14 +52,8 @@ export default function Login() {
               Log In
             </Button>
           </Form>
-          <div className="w-100 text-center mt-3">
-            <Link to="/forgot-password">Forgot Password?</Link>
-          </div>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup">Sign Up</Link>
-      </div>
     </>
-  )
+  );
 }
