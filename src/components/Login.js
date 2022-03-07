@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { Alert, Button, Card, Form } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
+import { facebookProvider, githubProvider, googleProvider } from '../config/authMethods'
 import { useAuth } from '../contexts/AuthContext'
 
 const Login = () => {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { login } = useAuth()
+    const { login, socialMediaAuth } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory()
@@ -23,6 +24,21 @@ const Login = () => {
         }
         setLoading(false)
     }
+
+    async function handleSocials(provider) {
+        try {
+            setError('')
+            setLoading(true)
+            await socialMediaAuth(provider)
+            history.push('/')
+        } catch (error) {
+            setError(error.message)
+        }
+        setLoading(false)
+
+
+    }
+
 
     return (
         <>
@@ -43,7 +59,18 @@ const Login = () => {
 
                         <Button type='submit' className='w-100' disabled={loading}>Log In</Button>
                     </Form>
-                    <div className='w-100 text-center mt-2'><Link to='/forgot-password'>Forgot Password?</Link></div>
+                    <div className='w-100 text-center mt-2 mb-2'><Link to='/forgot-password'>Forgot Password?</Link></div>
+                    <Button
+                        variant="light"
+                        onClick={()=>handleSocials(facebookProvider)}
+                        type='submit' className='w-100 mb-3'
+                        disabled={loading}>Log In with Facebook</Button>
+                    <Button
+                        variant="light"
+                        onClick={() => handleSocials(googleProvider)}
+                        type='submit'
+                        className='w-100 mb-3'
+                        disabled={loading}>Log In with Google</Button>
                 </Card.Body>
             </Card>
             <div className='w-100 text-center mt-2'>Need an account? <Link to='/signup'>Sign Up</Link></div>

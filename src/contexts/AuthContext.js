@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { auth } from '../firebase'
+import { auth } from '../config/firebase'
 
 const AuthContext = React.createContext()
 
@@ -36,6 +36,10 @@ export const AuthProvider = ({ children }) => {
         return currentUser.updatePassowrd(password)
     }
 
+    function socialMediaAuth(provider) {
+        return auth.signInWithPopup(provider).then(res => res.user).catch(e => e.message)
+    }
+
     useEffect(() => {
         const unsubscriber = auth.onAuthStateChanged(user => {
             setLoading(false)
@@ -53,7 +57,8 @@ export const AuthProvider = ({ children }) => {
         logout,
         resetPassword,
         updateEmail,
-        updatePassowrd
+        updatePassowrd,
+        socialMediaAuth
     }
     return (
         <AuthContext.Provider value={value}>
