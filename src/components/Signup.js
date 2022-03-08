@@ -22,7 +22,7 @@ const Signup = () => {
       setError('')
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
-      history.push('/login')
+      history.push('/React-Firebase-Auth/login')
     } catch (error) {
       setError(error.message)
     }
@@ -56,7 +56,7 @@ const Signup = () => {
           </Form>
         </Card.Body>
       </Card>
-      <div className='w-100 text-center mt-2'>Already have an account? <Link to='/login'>Log In</Link></div>
+      <div className='w-100 text-center mt-2'>Already have an account? <Link to='/React-Firebase-Auth/login'>Log In</Link></div>
     </>
   )
 }

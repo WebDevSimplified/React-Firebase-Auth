@@ -38,10 +38,10 @@ const ForgotPassword = () => {
                         </Form.Group>
                         <Button type='submit' className='w-100' disabled={loading}>Reset Password</Button>
                     </Form>
-                    <div className='w-100 text-center mt-2'><Link to='/login'>Log In</Link></div>
+                    <div className='w-100 text-center mt-2'><Link to='/React-Firebase-Auth/login'>Log In</Link></div>
                 </Card.Body>
             </Card>
-            <div className='w-100 text-center mt-2'>Need an account? <Link to='/signup'>Sign Up</Link></div>
+            <div className='w-100 text-center mt-2'>Need an account? <Link to='/React-Firebase-Auth/signup'>Sign Up</Link></div>
         </>
     )
 }

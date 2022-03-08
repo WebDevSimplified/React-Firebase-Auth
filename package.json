@@ -1,6 +1,6 @@
 {
-  "name": "firebase-react-auth",
-  "homepage": "https://MikhailKolomoitsev.github.io/React-Firebase-Auth",
+  "name": "firebase",
+  "homepage": "https://MikhailKolomoitsev.github.io/firebase",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

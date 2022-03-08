@@ -13,7 +13,7 @@ const Dashboard = () => {
 
     try {
       await logout()
-      history.pushState('/login')
+      history.pushState('/React-Firebase-Auth/login')
     } catch (error) {
       setError(error.message)
     }
@@ -26,7 +26,7 @@ const Dashboard = () => {
           <h2 className='text-center mb-4'>Profile</h2>
           {error && <Alert variant='danger'>{error}</Alert>}
           <strong>Email: </strong>{currentUser ? currentUser.email : 'not loggedin'}
-          <Link to='/update-profile' className='btn btn-primary w-100 mt-3'>Update Profile</Link>
+          <Link to='/React-Firebase-Auth/update-profile' className='btn btn-primary w-100 mt-3'>Update Profile</Link>
         </Card.Body>
       </Card>
       <Card>

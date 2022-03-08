@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         <Route
             {...rest}
             render={props => {
-               return  currentUser ? <Component {...props}/>:<Redirect to='/login'></Redirect>
+                return currentUser ? <Component {...props} /> : <Redirect to='/React-Firebase-Auth/login'></Redirect>
             }}
         ></Route>
     )
