@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, Fragment } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
@@ -20,7 +20,7 @@ export default function Dashboard() {
   }
 
   return (
-    <>
+    <Fragment>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
@@ -36,6 +36,6 @@ export default function Dashboard() {
           Log Out
         </Button>
       </div>
-    </>
+    </Fragment>
   )
 }
