@@ -20,7 +20,7 @@ export default function Dashboard() {
   }
 
   return (
-    <Fragment>
+    <>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
@@ -36,6 +36,6 @@ export default function Dashboard() {
           Log Out
         </Button>
       </div>
-    </Fragment>
+    </>
   )
 }
