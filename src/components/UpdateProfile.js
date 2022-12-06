@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function UpdateProfile() {
   const emailRef = useRef()
@@ -10,9 +10,10 @@ export default function UpdateProfile() {
   const { currentUser, updatePassword, updateEmail } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const history = useHistory()
+  const history = useNavigate()
 
   function handleSubmit(e) {
+    //if passwords are not same I set this error
     e.preventDefault()
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
@@ -24,19 +25,21 @@ export default function UpdateProfile() {
 
     if (emailRef.current.value !== currentUser.email) {
       promises.push(updateEmail(emailRef.current.value))
+      //Check if our email is not equal to our current email
+      //if we've changed our email, I'll want to add that email by using (promises.push)
     }
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value))
     }
 
-    Promise.all(promises)
-      .then(() => {
-        history.push("/")
+    Promise.all(promises) //Our array promises
+      .then(() => { //our .then will run everytime our promises execute
+        history.push("/") //redirecting to our home page
       })
       .catch(() => {
         setError("Failed to update account")
       })
-      .finally(() => {
+      .finally(() => { //our .finally will set our loading back to false and it runs if we either succeed or fail
         setLoading(false)
       })
   }
@@ -62,7 +65,7 @@ export default function UpdateProfile() {
               <Form.Control
                 type="password"
                 ref={passwordRef}
-                placeholder="Leave blank to keep the same"
+                placeholder="Leave it blank to keep them same"
               />
             </Form.Group>
             <Form.Group id="password-confirm">
@@ -70,7 +73,7 @@ export default function UpdateProfile() {
               <Form.Control
                 type="password"
                 ref={passwordConfirmRef}
-                placeholder="Leave blank to keep the same"
+                placeholder="Leave it blank to keep them same"
               />
             </Form.Group>
             <Button disabled={loading} className="w-100" type="submit">
