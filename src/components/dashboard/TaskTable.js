@@ -1,8 +1,9 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table';
-
+import {faEye, faTrash} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function TaskTable({tasks}) {
-  console.log(tasks)
+  
   return (
     <div className="card shadow rounded w-100">
       <Table>
@@ -12,7 +13,7 @@ export default function TaskTable({tasks}) {
             <th>Description</th>
             <th>Status</th>
             <th>Due Date</th>
-            <th>View</th>
+          
           </tr>
         </thead>
         <tbody>
@@ -21,10 +22,11 @@ export default function TaskTable({tasks}) {
             tasks.map(task => (
               <tr key={task.id}>
                 <td>{task.title}</td>
-                <td>{task.description}</td>
+                <td className='text-truncate' style={{maxWidth: '8rem'}}>{task.description}</td>
                 <td>{task.status}</td>
                 <td>{new Date(task.due_date.seconds*1000).toDateString()}</td>
-                <td>View</td>
+                <td><button className='btn btn-sm btn-info mx-2'><FontAwesomeIcon icon={faEye} /></button>
+                <button className='btn btn-sm btn-danger'><FontAwesomeIcon icon={faTrash} /></button></td>
               </tr>
             ))
             }

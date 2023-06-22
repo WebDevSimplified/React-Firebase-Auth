@@ -23,6 +23,7 @@ export const db = {
   formatDoc: doc => {
     return { id: doc.id, ...doc.data() }
   },
+  formatDate: date => firebase.firestore.Timestamp.fromDate(new Date(date)),
   getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp,
 }
 
