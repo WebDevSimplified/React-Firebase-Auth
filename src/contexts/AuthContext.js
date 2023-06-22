@@ -40,7 +40,6 @@ export function AuthProvider({ children }) {
       setCurrentUser(user)
       setLoading(false)
     })
-    console.log(currentUser)
     return unsubscribe
   }, [])
 

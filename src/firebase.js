@@ -18,7 +18,14 @@ const app = firebase.initializeApp({
 
 export const firestore = app.firestore()
 
-export const database = {}
+export const db = {
+  tasks: firestore.collection("tasks"),
+  formatDoc: doc => {
+    return { id: doc.id, ...doc.data() }
+  },
+  getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp,
+}
+
 export const auth = app.auth()
 export const storage = firebase.storage()
 
