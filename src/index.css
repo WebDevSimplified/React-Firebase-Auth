@@ -1,6 +1,6 @@
 
 .bg-navbar {
-  background-color: #712CF9;
+  background-color: #8349f6;
   color: #fff;
 }
 
@@ -9,4 +9,10 @@
     width: 1300px;
     padding: 1rem;
     margin-top: 1rem;
+}
+
+.small-title{
+    font-size: .75rem;
+    font-weight: bold;
+    margin-bottom: 5px;
 }

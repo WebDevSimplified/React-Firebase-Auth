@@ -4,13 +4,9 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { db } from '../../firebase';
 
 export default function AddTaskModal(){
+  const defaultFormData = { title: '', description: '', status: 'not started', due_date: '' };
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    status: 'todo',
-    due_date: '',
-  });
+  const [formData, setFormData] = useState(defaultFormData);
 
   const {currentUser} = useAuth();
 
@@ -32,6 +28,7 @@ export default function AddTaskModal(){
         due_date: db.formatDate(formData.due_date),
         user_id: currentUser.uid,
     });
+    setFormData(defaultFormData);
     handleClose();
   };
 
@@ -47,7 +44,7 @@ export default function AddTaskModal(){
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formName">
+            <Form.Group controlId="formName" required>
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
@@ -59,7 +56,7 @@ export default function AddTaskModal(){
 
             <Form.Group controlId="formStatus">
                 <Form.Label>Status</Form.Label>
-                <Form.Control as="select" name="status" onChange={handleChange}>
+                <Form.Control as="select" name="status" onChange={handleChange} required>
                     <option value="not started">Not Started</option>
                     <option value="in progress">In Progress</option>
                     <option value="completed">Completed</option>
@@ -68,7 +65,7 @@ export default function AddTaskModal(){
 
             <Form.Group controlId="formDueDate">
                 <Form.Label>Due Date</Form.Label>
-                <Form.Control type="date" name="due_date" onChange={handleChange}/>
+                <Form.Control type="date" name="due_date" onChange={handleChange} required/>
             </Form.Group>
 
             <Form.Group controlId="formMessage">
@@ -78,6 +75,7 @@ export default function AddTaskModal(){
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
 
